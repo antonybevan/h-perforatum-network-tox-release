@@ -1,6 +1,7 @@
 # Separating effect size from statistical evidence in network-proximity rankings under target-count asymmetry: a controlled liver-interactome audit
 
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
+[![Release gates](https://github.com/antonybevan/h-perforatum-network-tox-release/actions/workflows/tests.yml/badge.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release/actions/workflows/tests.yml)
 [![Code License: MIT](https://img.shields.io/badge/code%20license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Docs License: CC BY 4.0](https://img.shields.io/badge/docs%20%26%20data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release)
@@ -35,7 +36,7 @@ Hyperforin is topologically *closer* by closest-path distance (smaller *d*c) yet
 
 ```bash
 git clone https://github.com/antonybevan/h-perforatum-network-tox-release
-cd h-perforatum-network-tox
+cd h-perforatum-network-tox-release
 pip install -r requirements-lock.txt          # pinned versions (Python 3.12)
 ```
 
@@ -79,7 +80,7 @@ This repository has passed a full adversarial multi-agent audit. Key verificatio
 | Data integrity | `python scripts/validate_data_integrity.py` | ALL CHECKS PASSED |
 | Unit tests | `python -m pytest -q` | 113 passed |
 | Checksums | `shasum -a 256 -c data/CHECKSUMS.sha256` | 45/45 OK |
-| Full pipeline | `python scripts/run_pipeline.py` | 20/21 steps pass (1 expected permutation variance) |
+| Full pipeline | `python scripts/run_pipeline.py` | 22/22 steps pass |
 | Reviewer evidence | `python REVIEWER_EVIDENCE.py` | PASS |
 | Guney fidelity | `python GUNEY_FIDELITY_check.py` | PASS |
 
