@@ -1,0 +1,12 @@
+# Data artefacts are committed as plain blobs (no Git LFS) so the repository is
+# self-contained: clone/archive/Zenodo exports yield real files, not pointers.
+# Mark them binary / no-EOL-normalisation so SHA-256 checksums are preserved.
+data/processed/*.parquet binary
+data/processed/*.csv     -text
+data/raw/*.csv           -text
+data/raw/*.tsv           -text
+data/external/*.csv      -text
+*.parquet binary
+*.xlsx    binary
+*.pdf     binary
+*.tiff    binary

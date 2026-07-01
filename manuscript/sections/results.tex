@@ -1,0 +1,123 @@
+\section{Results}
+
+\subsection{The null standard deviation shrinks with target count for every metric}
+
+The null standard deviation of the proximity Z-score follows a general property of averaged statistics: it shrinks as the number of targets grows. Drawing degree-matched random seed sets of increasing size and measuring the null standard deviation of per-target influence, we find $\sigma_{\text{null}} \propto |T|^{-0.48}$ (log--log slope; theoretical $-1/2$; Table~\ref{tab:scaling}). This is the Law of Large Numbers acting on a mean over targets, and it is observed across all three evaluated metrics: in the compound-specific degree-matched permutation nulls, the Hyperforin-to-Quercetin null-SD ratio is 2.40--2.57 for shortest-path, 2.45--3.04 for random-walk influence, and 2.47--2.93 for expression-weighted influence, against the expected $\sqrt{62/10} = 2.49$ (per-metric null parameters in Table~\ref{tab:s_nullsd}). Consequently, influence-based Z-scores are subject to the same shrinkage as proximity Z-scores, and Z-score magnitude should not be interpreted as a direct effect-size comparison across compounds of very different target count. This motivates reporting an effect size alongside the evidence. We first characterize the operating regime in which the null-precision law produces rank reversal.
+
+\begin{table}[ht]
+\centering
+\caption{\textbf{Null standard deviation of per-target influence scales as $|T|^{-1/2}$} (STRING $\geq$900; degree-matched random seed sets). The log--log slope is $-0.48$.}
+\label{tab:scaling}
+\begin{tabular}{@{}lccccc@{}}
+\toprule
+$|T|$ & 5 & 10 & 20 & 40 & 62 \\
+\midrule
+$\sigma_{\text{null}}$ & 0.0093 & 0.0068 & 0.0059 & 0.0035 & 0.0028 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\subsection{The null-precision law defines a conditional operating regime for rank reversal}
+\label{subsec:opregime}
+
+To characterize the operating regime of the proximity Z-score under target-count asymmetry, we constructed a degree-controlled calibration benchmark on the same liver LCC and DILI module, sampling random target-set ``probes'' across sizes ($|T| \in \{5,8,10,15,20,30,40,60,62,80\}$) and comparing their raw closest distance with a size-level calibration Z-score; no toxicity outcome is modeled (Methods; \texttt{scripts/run\_operating\_regime\_benchmark.py}). This benchmark Z-score is used to study the operating behavior of standardization across target counts; it is not the per-compound Guney null used for the real compounds.
+
+The null-precision mechanism is also observed in size-matched pseudo-module controls. The null standard deviation scales as $\sigma_{\text{null}} \propto |T|^{-0.499}$ (95\% CI $[-0.502,-0.495]$, $R^2=0.9999$; degree-distribution-pinned probes on a ten-point size grid, consistent with the coarser per-target-influence estimate of Table~\ref{tab:scaling}), indistinguishable from the theoretical $-1/2$ and from a uniform-probe control ($-0.500$), and the exponent is similar for the real DILI module ($-0.495$) and for random size-matched pseudo-modules ($-0.498$; Fig.~\ref{fig:opregime}A). The larger set's sharper null therefore gives it the \emph{capacity} to register weaker absolute proximity as stronger standardized evidence: the maximum raw-distance margin it can overturn is $\delta_{\max}(R) = (\mu_L-\mu_S) + |z_S|\,\sigma_L(\sqrt{R}-1)$ (Fig.~\ref{fig:opregime}B; this follows by solving $Z_L = Z_S$ for the raw margin $\delta = d_c^L - d_c^S$, using $\sigma_S/\sigma_L = \sqrt{R}$ from the $|T|^{-1/2}$ law). The variance contrast scales as $\sqrt{R}$; for a fixed smaller-set size, the overturnable raw-margin term can be written as $|z_S|\sigma_S(1-R^{-1/2})$, so it increases with target-count ratio but saturates. The coefficients are empirical: here the null-mean offset $\mu_L-\mu_S$ is negligible ($+0.001$), a property of this interactome's distance geometry rather than a structural zero.
+
+Crucially, realized reversals are conditional. Conditioning on the smaller set being genuinely closer by a material margin ($\geq 0.3$ hops, approximately $0.3/2.2 \approx 14\%$ of the null-mean closest distance in this network; $\geq 0.5$ hops, $\sim$23\%, as a stricter alternative), the larger set overturns the ranking in $\approx 0\%$ of degree-matched probe pairs up to $R=4$ and only $0.39\%$ at $R=8$ ($\geq 0.5$ hops: $\leq 0.01\%$ throughout; a no-shrinkage counterfactual gives $0\%$; Table~\ref{tab:s_opregime}). Unconditionally, however, Z-score and raw-distance rankings disagree in $\sim$12\% of cross-size comparisons at $R=6.2$, a rate that is non-negligible for naive cross-compound Z-score comparison. In this benchmark, material reversals are concentrated when the smaller set is above the 90th percentile of probe-pair margins (large $|z_S|$), so that a modest raw advantage falls under the $\delta_{\max}$ envelope. A biologically interpretable pair falling within this regime is examined next (\S\ref{subsec:dissociate}).
+
+
+
+\subsection{Raw proximity and proximity-Z rank the two compounds differently}
+\label{subsec:dissociate}
+
+The Hyperforin/Quercetin pair falls within the characterized regime. Hyperforin's closeness margin over Quercetin ($d_c$ difference $0.38$) sits at the $91$st percentile of probe-pair margins and below the $\delta_{\max}\approx 0.63$ envelope at $R=6.2$, placing it inside the reversal region (Fig.~\ref{fig:opregime}C). In the liver-expressed largest connected component (LCC) of the STRING $\geq$900 interactome (7{,}677 nodes; 66{,}908 edges), Hyperforin engages 10 targets and Quercetin 62; the drug-induced liver injury (DILI) module contains 82 genes (Fig.~\ref{fig:context}; the 82-gene set is listed in Table~\ref{tab:s_dili}). Hyperforin's targets are topologically closer to the DILI module by shortest-path distance than Quercetin's, $d_c = 1.30$ versus $1.68$. The degree-matched proximity Z-scores order the compounds in the opposite direction: Hyperforin $Z = -3.86$, Quercetin $Z = -5.44$ (Table~\ref{tab:effevid}).
+
+The Z-score is a standardized quantity, $Z = (d_c - \mu_{\text{null}})/\sigma_{\text{null}}$, in which the observed distance is compared to the mean and spread of distances for random target sets of the same size and degree. These two statistics answer different questions: $d_c$ measures raw topological effect; $Z$ measures standardized evidence against a null. Quercetin's 62 targets sit far below the tightly concentrated null expected for 62 random degree-matched genes ($\mu = 2.17$, $\sigma = 0.091$), producing a large $|Z|$; Hyperforin's 10 targets sit below a broader null ($\mu = 2.21$, $\sigma = 0.235$), producing a smaller $|Z|$ despite a shorter absolute distance. Hyperforin has the stronger raw closest-distance ($d_c$) effect; Quercetin has the stronger standardized evidence (Fig.~\ref{fig:dumbbell}). The instability is in the cross-compound \textit{evidence ranking}: between thresholds the proximity-Z ranking reverses (Hyperforin $Z = -6.04$ vs Quercetin $-5.46$ at $\geq$700; the order flips at $\geq$900), whereas the raw $d_c$ ranking (Hyperforin closer at both thresholds) does not.
+
+\begin{table}[ht]
+\centering
+\caption{\textbf{Effect size and standardized evidence dissociate under target-count asymmetry} (STRING $\geq$900). Hyperforin is closer ($d_c$) yet less ``significant'' ($Z$); the difference is driven by the smaller null standard deviation of the larger target set.}
+\label{tab:effevid}
+\begin{tabular}{@{}l S[table-format=2.0] S[table-format=1.2] S[table-format=1.2] S[table-format=1.3] S[table-format=-1.2]@{}}
+\toprule
+\textbf{Compound} & {\textbf{$n$ targets}} & {\textbf{$d_c$}} & {\textbf{$\mu_{\text{null}}$}} & {\textbf{$\sigma_{\text{null}}$}} & {\textbf{$Z$}} \\
+\midrule
+Hyperforin & 10 & 1.30 & 2.21 & 0.235 & -3.86 \\
+Quercetin  & 62 & 1.68 & 2.17 & 0.091 & -5.44 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+
+\subsection{Perturbation efficiency is the mean per-target influence}
+
+We quantify influence with random walk with restart (RWR) \citep{Kohler2008, Cowen2017}. With column-normalized transition matrix $W = AD^{-1}$, restart probability $\alpha$, and restart vector $\mathbf{p}_0$, let $\mathbf{I}_n$ denote the $n \times n$ identity matrix. The steady state is
+\begin{equation}
+\mathbf{p} = \alpha\,[\,\mathbf{I}_n - (1-\alpha)W\,]^{-1}\mathbf{p}_0. \label{eq:rwr}
+\end{equation}
+Influence on the DILI module $D$ is
+\begin{equation}
+I(T,D) = \sum_{d \in D} p_d. \label{eq:infl}
+\end{equation}
+Taking the restart vector uniform over the target set, $p_0(i) = 1/|T|$ for $i \in T$ and $0$ otherwise, Eq.~\eqref{eq:rwr} is linear in $\mathbf{p}_0$, so
+\begin{equation}
+E(T,D) \equiv I(T,D) = \frac{1}{|T|}\sum_{t \in T}\sum_{d \in D} p_d^{(t)}, \label{eq:pe}
+\end{equation}
+Perturbation efficiency $E$ is therefore exactly the mean per-target influence on the disease module --- a size-normalized effect-size measure, not a re-standardized evidence statistic. Here $\mathbf{p}^{(t)}$ denotes the RWR steady-state vector seeded from target $t$ alone. We verified Eq.~\eqref{eq:pe} numerically (joint vs mean-of-single-target influence agree to RWR tolerance: $0.11380975$ vs $0.11380968$ for Hyperforin).
+
+At STRING $\geq$900, $E = 0.1138$ for Hyperforin and $0.0322$ for Quercetin (Fig.~\ref{fig:efficiency}; and $0.1212$ vs $0.0326$ at $\geq$700): unlike the proximity-Z ranking, which reverses between thresholds (\S\ref{subsec:dissociate}), the per-target influence ranking is stable across the two evaluated network thresholds for both RWR and expression-weighted influence (Table~\ref{tab:s_threshold}). The ranking is robust to the restart probability across $\alpha \in [0.10, 0.70]$ (Hyperforin above Quercetin throughout), although the magnitude of the ratio is $\alpha$-dependent (2.90 at $\alpha=0.10$ to 13.35 at $\alpha=0.70$; Table~\ref{tab:s_alpha}); we therefore treat the ranking, not the ratio, as the robust feature, and do not interpret $\alpha$-sensitive fold ratios as absolute biological constants. Expression weighting (destination-node liver expression; Methods) preserves the ordering (Fig.~\ref{fig:ewi}) and is insensitive to the expression floor (efficiency ratio 2.69--2.70 across floors $0$--$0.1$; Table~\ref{tab:s_floor}).
+
+
+\subsection{Separating direct overlap from propagated influence}
+
+The raw per-target advantage ($3.5\times$) conflates two mechanistically distinct contributions. Four of ten Hyperforin targets (ABCB1, CYP2C9, MMP2, NR1I2) are themselves DILI-module genes (Tables~\ref{tab:s_evidence}, \ref{tab:s_hyptargets}), versus one of sixty-two for Quercetin (MMP2), so part of Hyperforin's measured disease-module influence is \emph{direct}: steady-state probability assigned to seed nodes that are themselves DILI-module genes. The canonical proximity framework retains such distance-zero contributions, treating a drug target that coincides with a disease protein as a real, if special, signal \citep{Guney2016}; we retain it likewise, but separate it from indirect, network-\emph{propagated} influence. Analogous to leave-one-out scoring used in network propagation \citep{Kohler2008, Cowen2017}, we score each target against the disease module \emph{excluding the target itself}, isolating the propagated part of the module influence (Eq.~\eqref{eq:infl}).
+
+Decomposed this way (Table~\ref{tab:leakage}, Fig.~\ref{fig:leakage}), 62\% of Hyperforin's per-target influence is direct overlap (direct component $0.0711$ versus $0.0032$ for Quercetin, only 10\% of which is direct), while its propagated component is $0.0427$ versus $0.0290$, a propagated advantage of $1.5\times$ that is far below the raw $3.5\times$. The propagated component remains above a degree-matched background: it sits at the 99.9th percentile of a degree-matched random 10-gene background ($n=1{,}000$; $3.3\times$ the background mean, empirical $p=0.002$), although it does not exceed every random set, and some size-matched Quercetin subsets reach comparable values; alternative exclusions of the propagated term bound the advantage to $1.2$--$1.9\times$. Both components concentrate in the PXR--CYP--transporter axis, which is at once the established mechanism of Hyperforin-mediated hepatic interactions and the locus of the overlap. The propagated advantage is therefore modest, layered on a larger and mechanistically coherent direct-overlap effect rather than reflecting a clear topological separation. Two further topology checks clarify this interpretation: the network separation measure $S_{AB}$ \citep{Menche2015} shows both target sets are topologically separated from the DILI module, Hyperforin slightly more so (Table~\ref{tab:s_sep}). This does not contradict the $d_c$ result because $S_{AB}$ also depends on within-set compactness; Hyperforin's target set is tighter internally ($\langle d_{AA}\rangle = 1.20$ vs $1.55$), raising its separation despite its shorter closest distance. Separately, Hyperforin's targets carry more direct (distance-1) DILI connections per target (3.4 vs 1.5; Table~\ref{tab:s_connectivity}), so the advantage is concentrated in a few directly DILI-linked targets. The decomposition is also robust to the disease-module definition itself: removing the four entangled pharmacogenes from the module, so the targets cannot directly overlap it, leaves the propagated advantage intact and marginally larger ($1.47\times \to 1.58\times$; Table~\ref{tab:s_modulesens}), showing the propagated residual is not eliminated when direct overlap is removed from the module. A size-matched bootstrap of the raw influence (Fig.~\ref{fig:bootstrap}) reproduces the baseline ratio but, lacking the overlap adjustment, is superseded by this decomposition.
+
+\begin{table}[ht]
+\centering
+\caption{\textbf{Direct versus propagated decomposition of per-target influence} (STRING $\geq$900). Raw influence separates into a direct component (steady-state mass on target$\cap$DILI nodes, retained following \citet{Guney2016}) and a propagated component isolated by leave-one-out \citep{Kohler2008}; alternative exclusions of the propagated term bound the residual advantage. The direct-overlap ratio is reported descriptively and is not interpreted as a biological fold-effect.}
+\label{tab:leakage}
+\begin{tabular}{@{}l S[table-format=1.4] S[table-format=1.4] S[table-format=2.1]@{}}
+\toprule
+\textbf{Component / control} & {\textbf{$E$(Hyperforin)}} & {\textbf{$E$(Quercetin)}} & {\textbf{ratio}} \\
+\midrule
+Raw per-target influence & 0.1138 & 0.0322 & 3.5 \\
+\quad Mass on target$\cap$DILI nodes & 0.0711 & 0.0032 & 22.5 \\
+\quad Propagated (leave-one-out) & 0.0427 & 0.0290 & 1.5 \\
+\midrule
+Propagated, CYP/transporter targets removed & 0.0338 & 0.0290 & 1.2 \\
+Propagated, shared targets removed & 0.0541 & 0.0288 & 1.9 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{The proximity computation is faithful to the canonical implementation}
+
+We next compared the proximity result against Guney et al.'s canonical implementation (\texttt{emreg00/toolbox}): the closest distance reproduces exactly (observed $d_c$ 1.300/1.677) and the Z-scores to within permutation tolerance. All reference distributions use $n=1{,}000$ random sets, fixed seed 42, Guney's $\geq$100-node degree-binning, and preserve the DILI module size ($|D|=82$). Under the fixed-disease null (randomizing targets only, disease module held at the 82 DILI genes), the $\geq$100-node binning gives Hyperforin $Z = -4.09$, Quercetin $Z = -5.34$ --- Quercetin more ``significant'' despite being topologically farther by shortest-path distance. Under Guney's two-sided null (randomizing both the target set and a degree-matched disease set of size 82), both compounds remain strongly proximal relative to their nulls but the dissociation attenuates to near-parity: Hyperforin $Z = -3.55$, Quercetin $Z = -3.66$ (the null standard deviation continues to shrink with set size, ratio 2.37 vs expected 2.49). The interpretation is consistent: Hyperforin is the topologically closer compound in every construction, while its evidence ranking relative to Quercetin depends on the null --- strongest when the actual DILI module is held fixed, the configuration relevant to comparing two compounds against one disease (Table~\ref{tab:guney}).
+
+\begin{table}[ht]
+\centering
+\caption{\textbf{Revalidation against the canonical proximity implementation} (STRING $\geq$900, $n=1{,}000$, seed 42, $\geq$100-node degree-binning, $|D|=82$ preserved). The effect/evidence dissociation is clear under the fixed-disease null and attenuates under the two-sided null; Hyperforin is the closer compound throughout. The raw $d_c$ ordering (Hyperforin closer) is invariant across all constructions; the $Z$-score evidence difference is null-dependent.}
+\label{tab:guney}
+\begin{tabular}{@{}l S[table-format=-1.2] S[table-format=-1.2]@{}}
+\toprule
+\textbf{Null model ($d_c$)} & {\textbf{Hyperforin $Z$}} & {\textbf{Quercetin $Z$}} \\
+\midrule
+Repo $\pm$25\% window, fixed disease (primary) & -3.86 & -5.44 \\
+Guney $\geq$100-bin, fixed disease & -4.09 & -5.34 \\
+Guney $\geq$100-bin, two-sided & -3.55 & -3.66 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+
+\subsection{Chemical-similarity negative control}
+\label{subsec:chemsim}
+
+Neither compound is a close structural analogue of DILIrank 2.0 reference drugs \citep{Chen2016, Olubamiwa2025}---the retrievable-SMILES binary subset of DILIrank 2.0 (542 DILI-positive, vMost/vLess-concern, and 365 DILI-negative, vNo-concern, drugs; the 354 ambiguous-concern drugs are excluded; Methods)---with maximum Tanimoto to any DILIrank reference drug $<0.4$ (Hyperforin 0.20, Quercetin 0.22; the maxima against DILI-positive references alone are 0.15 and 0.21 \citep{Maggiora2014}), so structural-analogue similarity to those compounds is unlikely to explain the observed network pattern (Fig.~\ref{fig:chemsim}); this argues against close structural-analogue confounding within the DILIrank reference set.

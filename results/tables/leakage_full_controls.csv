@@ -1,0 +1,6 @@
+control,E_Hyperforin,E_Quercetin,ratio
+Baseline (includes overlap),0.1138,0.0322,3.54
+Self-mass excluded (leave-one-out),0.0427,0.029,1.47
+DILI-member seeds removed,0.0431,0.0295,1.46
+CYP/transporter seeds removed,0.0338,0.029,1.17
+Shared targets removed (both),0.0541,0.0288,1.88

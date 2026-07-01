@@ -1,0 +1,16 @@
+# Pinned environment that produced the committed results (from reproducibility.lock.yml
+# verified_environment). Use:  pip install -r requirements-lock.txt
+# Python 3.12.13
+pandas==2.3.3
+numpy==2.5.0
+scipy==1.18.0
+networkx==3.6.1
+statsmodels==0.14.6
+matplotlib==3.11.0
+pyarrow==24.0.0
+tqdm==4.68.3
+requests==2.34.2
+rdkit==2026.3.3
+pytest==9.1.1
+pytest-cov==7.1.0
+ruff==0.15.20

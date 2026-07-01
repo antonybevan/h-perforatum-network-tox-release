@@ -1,0 +1,79 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{charter}
+\usepackage[hidelinks]{hyperref}
+\usepackage{setspace}
+
+\pagestyle{empty}
+
+\begin{document}
+
+\noindent
+\textbf{Antony Bevan} \\
+Department of Pharmacognosy \\
+Madurai Medical College \\
+Madurai, Tamil Nadu, India \\
+Email: \href{mailto:antonybevan04@gmail.com}{antonybevan04@gmail.com}
+
+\bigskip
+
+\noindent
+June 28, 2026
+
+\bigskip
+
+\noindent
+Dr.\ Guang Hu \\
+Handling Editor, \textit{Scientific Reports} \\
+Nature Portfolio
+
+\bigskip
+
+\noindent
+Dear Dr.\ Hu,
+
+\onehalfspacing
+
+We are grateful for the opportunity to submit a revised version of our manuscript, now titled \textbf{``Separating effect size from statistical evidence in network-proximity rankings under target-count asymmetry: a controlled liver-interactome audit''} (formerly submitted under a target-count-bias correction framing), for consideration as a Research Article in \textit{Scientific Reports}.
+
+We thank you and both reviewers for an exceptionally constructive critique. The reviews prompted us to reconsider the central framing of the work, and the revision is substantially stronger as a result. A point-by-point response accompanies this letter; the principal changes are summarised below.
+
+\bigskip
+\noindent \textbf{Reframing the central claim.}
+Reviewer~2 correctly observed that the dependence of proximity Z-scores on target-set size is \emph{expected statistical precision}, not a flaw in the metric. We have rebuilt the manuscript around this insight rather than defending the original framing. The revised thesis is interpretive and, we believe, more useful to the community: network-proximity Z-scores are valid \emph{evidence} statistics whose \emph{magnitude} should not be read as a cross-compound \emph{effect-size} ranking when target counts differ sharply. This is the effect-size-versus-significance distinction of the ASA statement on p-values (Wasserstein \& Lazar, 2016), transposed to network medicine, and it is fully consistent with Guney et al.\ (2016) and Menche et al.\ (2015). All language describing variance shrinkage as a ``bias'' or ``artifact'' has been removed.
+
+\bigskip
+\noindent \textbf{New analyses and an honest downgrade of the headline result.}
+We formalise the null-variance shrinkage as a metric-independent scaling result; add the requested restart-probability and expression-floor sensitivity analyses; and revalidate our proximity implementation against Guney's published toolbox code (\texttt{emreg00/toolbox}), reproducing $d_c$ exactly. Critically, we add a new analysis (\S2.4, Table~3, Figure~6) separating \emph{direct} target--disease overlap from \emph{propagated} network influence. This shows the raw per-target advantage is largely direct overlap; the genuinely propagated advantage is a modest $\sim$1.5$\times$. We report this candidly rather than the original headline number, and we have removed the corresponding over-claims.
+
+\bigskip
+\noindent \textbf{Code and data deposition (per your request).}
+The complete pipeline, curated data, pinned dependency versions, input checksums, and figure scripts are archived on GitHub and will be deposited to Zenodo with a citable DOI before final publication. The manuscript now contains a dedicated \textbf{Code Availability} section. Every headline number is regenerated from the committed data by verification scripts included in the deposit.
+
+\bigskip
+\noindent \textbf{Presentation.}
+The manuscript has been rebuilt to journal standard: decimal-aligned tables, consistent caption and float styling, line numbers for review, and figures regenerated without the interpretive overlay text the reviewers flagged.
+
+\bigskip
+\noindent \textbf{Suggested reviewers:}
+\begin{itemize}
+    \item \textbf{Feixiong Cheng}, Cleveland Clinic (Genomic Medicine Institute) -- chengf@ccf.org \\ \textit{Expert in network-based drug repurposing and interactome proximity.}
+    \item \textbf{Minjun Chen}, National Center for Toxicological Research, FDA -- minjun.chen@fda.hhs.gov \\ \textit{Creator of DILIrank; expert in predictive liver toxicology.}
+    \item \textbf{Jörg Menche}, University of Vienna / CeMM -- jorg.menche@univie.ac.at \\ \textit{Co-developer of the network-proximity and separation framework central to this work.}
+\end{itemize}
+
+\bigskip
+\noindent
+We confirm that the manuscript is original, is not under consideration elsewhere, and has been approved for submission. We believe the revised manuscript directly addresses every reviewer and editorial point and is now a more rigorous and defensible contribution.
+
+\bigskip
+\noindent
+Sincerely,
+
+\vspace{1em}
+
+\noindent
+\textbf{Antony Bevan} \\
+Corresponding Author
+
+\end{document}

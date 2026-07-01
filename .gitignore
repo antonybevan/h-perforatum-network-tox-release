@@ -1,0 +1,101 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb
+
+# Environment
+.env
+.venv
+env/
+venv/
+ENV/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (keep structure, ignore large files)
+data/external/*.txt.gz
+data/external/*.gz
+# *.parquet  # Now tracked with Git LFS
+!data/processed/.gitkeep
+
+# Results (keep structure)
+results/plots/*.png
+results/plots/*.pdf
+!results/plots/sensitivity_final.png
+!results/plots/sensitivity_final.pdf
+!results/.gitkeep
+
+# Temporary and Audit Logs
+*.log
+*.tmp
+temp/
+.Rproj.user
+*.xml
+full database.xml
+data_audit*.txt
+severity_analysis.txt
+runtime.txt
+metadata.json
+tracked_files.txt
+.coverage
+.RData*
+.Rhistory
+R/.Rhistory
+
+# LaTeX artifacts
+manuscript/*.aux
+manuscript/*.bbl
+manuscript/*.blg
+manuscript/*.log
+manuscript/*.out
+manuscript/*.toc
+manuscript/*.fdb_latexmk
+manuscript/*.fls
+manuscript/*.synctex.gz
+
+# Legacy Research Artifacts
+research/
+archive/
+manuals/
+
+# Pytest cache
+.pytest_cache/
+
+# Internal working/strategy memos — kept local, excluded from the public Zenodo/GitHub archive.
+# (Reproducibility code and the response-to-reviewers deliverable are intentionally NOT listed here.)
+AUDIT_FINDINGS_AND_DEFENSE.md
+DEEP_RESEARCH_DOSSIER.md
+MASTER_DOSSIER.md
+REPO_UNDERSTANDING_REPORT.md
+REVIEWER_RESPONSE_STRATEGY.md
+REVISED_MANUSCRIPT.md

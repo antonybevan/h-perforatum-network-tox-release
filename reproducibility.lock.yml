@@ -1,0 +1,169 @@
+schema_version: 1
+project: h-perforatum-network-tox
+created_for: scientific-reports-major-revision
+purpose: >
+  Reproducibility lock for the current manuscript pipeline. This file records
+  the analysis parameters, external data payloads, package constraints, and
+  compatibility conventions needed to regenerate the committed result tables.
+
+runtime:
+  python:
+    required: ">=3.10"
+    verified_version: "3.12.13"
+    package_constraints:
+      pandas: ">=2.3.0"
+      numpy: ">=1.24.0"
+      scipy: ">=1.10.0"
+      networkx: ">=3.0"
+      statsmodels: ">=0.14.0"
+      matplotlib: ">=3.7.0"
+      pyarrow: ">=12.0.0"
+      tqdm: ">=4.65.0"
+      requests: ">=2.28.0"
+      rdkit: ">=2023.3.1"
+      pytest: ">=7.0.0"
+      pytest-cov: ">=4.0.0"
+      ruff: ">=0.1.0"
+    verified_environment:
+      pandas: "2.3.3"
+      numpy: "2.5.0"
+      scipy: "1.18.0"
+      networkx: "3.6.1"
+      statsmodels: "0.14.6"
+      matplotlib: "3.11.0"
+      pyarrow: "24.0.0"
+      tqdm: "4.68.3"
+      requests: "2.34.2"
+      rdkit: "2026.3.3"
+      pytest: "9.1.1"
+      pytest-cov: "7.1.0"
+      ruff: "0.15.20"
+    git_lfs:
+      verified_version: "3.7.1"
+      required_for:
+        - "data/processed/*.csv"
+        - "data/processed/*.parquet"
+  r:
+    required_by_figures: true
+    packages:
+      - ggplot2
+      - ggsci
+      - scales
+      - ggrepel
+      - grid
+      - gridExtra
+      - patchwork
+      - dplyr
+      - tibble
+      - tidyr
+      - stringr
+      - forcats
+      - here
+      - readr
+
+analysis_parameters:
+  string_thresholds: [700, 900]
+  primary_string_threshold: 900
+  gtex_liver_tpm_floor: 1.0
+  rwr_restart_probability: 0.15
+  rwr_convergence_tolerance: 1.0e-6
+  rwr_max_iterations: 100
+  permutation_count: 1000
+  degree_match_tolerance_fraction: 0.25
+  random_seed: 42
+  bootstrap_iterations: 100
+  bootstrap_sample_size_source: "number of Hyperforin targets in targets_lcc.csv"
+  expression_weighting:
+    transform: "log2(TPM + 1)"
+    normalization: "min-max across network nodes"
+    normalized_expression_floor: 0.01
+    weighting_direction: "destination node"
+  chemical_similarity:
+    reference_dataset: "DILIrank 2.0"
+    smiles_source: "PubChem REST API with local JSON cache"
+    fingerprint: "Morgan/ECFP4"
+    fingerprint_radius: 2
+    fingerprint_bits: 2048
+    tanimoto_analog_threshold: 0.4
+
+compatibility_conventions:
+  permutation_p_values: >
+    All committed result tables (shortest-path, standard RWR, expression-weighted
+    RWR) report empirical one-tailed permutation p-values using the conservative
+    (r+1)/(n+1) convention (Phipson & Smyth 2010). With n=1000 randomizations the
+    floor is 1/1001 = 9.99e-4 (reported as p < 0.001). The permutation Z-score
+    carries the standardized magnitude. This replaces the earlier mixed
+    convention (one-tailed Gaussian tail for RWR/EWI; zero-allowing r/n for
+    shortest-path) that displayed underflow-style p-values; no zero-like p-values remain.
+  fdr_scope: "Benjamini-Hochberg correction is applied within each network threshold for RWR/EWI and across all shortest-path rows."
+  lcc_target_scope: "targets_lcc.csv uses targets present in both >=700 and >=900 liver LCCs."
+
+expected_primary_counts:
+  raw_targets:
+    Hyperforin: 14
+    Quercetin: 122
+  processed_targets:
+    Hyperforin: 14
+    Quercetin: 87
+  lcc_targets:
+    Hyperforin: 10
+    Quercetin: 62
+  dili_genes:
+    raw: 127
+    lcc_700: 84
+    lcc_900: 82
+  liver_proteome_genes: 13496
+  networks:
+    raw_700_edges: 236712
+    raw_900_edges: 100383
+    liver_lcc_700_nodes: 9773
+    liver_lcc_900_nodes: 7677
+
+external_payloads:
+  - path: data/external/string_links.txt.gz
+    status_in_repo: ignored_required_external
+    source: "STRING v12.0 human protein links"
+  - path: data/external/string_info.txt.gz
+    status_in_repo: ignored_required_external
+    source: "STRING v12.0 human protein info"
+  - path: data/raw/GTEx_Analysis_2017-06-05_v8_RNASeQCv1.1.9_gene_median_tpm.gct
+    status_in_repo: tracked
+    source: "GTEx v8 gene median TPM"
+  - path: data/raw/curated_gene_disease_associations.tsv
+    status_in_repo: tracked
+    source: "DisGeNET curated gene-disease associations"
+  - path: data/external/DILIrank_2.0.xlsx
+    status_in_repo: tracked
+    source: "FDA DILIrank 2.0"
+  - path: data/processed/*.csv
+    status_in_repo: git_lfs_payload_required
+  - path: data/processed/*.parquet
+    status_in_repo: git_lfs_payload_required
+
+entry_points:
+  full_python_pipeline: "python scripts/run_pipeline.py"
+  validate_data: "python scripts/run_pipeline.py --validate"
+  standard_rwr: "python scripts/run_standard_rwr_lcc_permutations.py"
+  expression_weighted_rwr: "python scripts/run_expression_weighted_rwr_permutations.py"
+  shortest_path: "python scripts/run_shortest_path_permutations.py"
+  bootstrap: "python scripts/run_bootstrap_sensitivity.py"
+  ewi_bootstrap: "python scripts/run_ewi_bootstrap_sensitivity.py"
+  chemical_similarity: "python scripts/run_chemical_similarity_control.py"
+  pvalue_and_variance_audit: "python scripts/audit_statistical_conventions.py"
+  full_pvalue_and_variance_recompute: "python scripts/audit_statistical_conventions.py --recompute"
+  dili_module_sensitivity: "python scripts/run_dili_module_sensitivity.py"
+  leakage_figure_data: "python scripts/generate_leakage_figure_data.py"
+  descriptive_supplement_audit: "python scripts/generate_descriptive_supp.py"
+  reviewer_headline_evidence: "python REVIEWER_EVIDENCE.py"
+  reviewer_leakage_scaling: "python REVIEWER_EVIDENCE_leakage_scaling.py"
+  guney_fidelity_check: "python GUNEY_FIDELITY_check.py"
+  verify_numbers: "python verify_numbers.py"
+  figures:
+    - "Rscript R/fig1_lollipop.R"
+    - "Rscript R/fig2_dumbbell.R"
+    - "Rscript R/fig3_ewi_waterfall.R"
+    - "Rscript R/fig4_ptni_phase.R"
+    - "Rscript R/fig5_bootstrap.R"
+    - "Rscript R/fig6_chemsim.R"
+    - "Rscript R/fig7_leakage.R"
+    - "Rscript R/fig8_opregime.R"

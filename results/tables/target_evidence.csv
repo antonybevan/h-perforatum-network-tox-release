@@ -1,0 +1,12 @@
+compound,gene,source,evidence_type,direct_binding,induction_or_modulation,in_DILI_module,shared_target,retained_in_cyp_transporter_control
+Hyperforin,NR1I2,literature,direct receptor agonist (PXR),yes,activation,yes,no,yes
+Hyperforin,CYP3A4,literature,PXR-induced enzyme,no,induction,no,yes,no
+Hyperforin,CYP2C9,literature,enzyme (inhibition/induction),partial,modulation,yes,no,no
+Hyperforin,CYP2B6,literature,PXR-induced enzyme,no,induction,no,no,no
+Hyperforin,ABCB1,literature,transporter (induced + direct inhibition),yes,induction,yes,no,no
+Hyperforin,ABCG2,literature,transporter modulation,partial,modulation,no,yes,no
+Hyperforin,ABCC2,literature,transporter modulation,partial,modulation,no,no,no
+Hyperforin,AKT1,literature,direct kinase inhibition,yes,inhibition,no,yes,yes
+Hyperforin,MMP2,literature,secretion inhibition,partial,inhibition,yes,yes,yes
+Hyperforin,MMP9,literature,secretion inhibition,partial,inhibition,no,yes,yes
+Quercetin,(62 targets; see Suppl. Table S7),ChEMBL bioactivity (CHEMBL159),in vitro binding/activity (IC50/Ki/EC50 <= 10 uM),yes,direct,MMP2 only (1/62),"ABCG2,AKT1,CYP3A4,MMP2,MMP9 (5/62)",n/a
