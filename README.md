@@ -34,8 +34,8 @@ Hyperforin is topologically *closer* by closest-path distance (smaller *d*c) yet
 ## Reproducibility
 
 ```bash
-git clone https://github.com/antonybevan/h-perforatum-network-tox
-cd h-perforatum-network-tox
+git clone https://github.com/antonybevan/h-perforatum-network-tox-release
+cd h-perforatum-network-tox-release
 pip install -r requirements-lock.txt          # pinned versions (Python 3.12)
 ```
 
@@ -120,6 +120,6 @@ If you use this pipeline or data, please cite (update with the published DOI on 
   author  = {Bevan, Antony},
   journal = {(under review, Scientific Reports)},
   year    = {2026},
-  note    = {Code: https://github.com/antonybevan/h-perforatum-network-tox}
+  note    = {Code: https://github.com/antonybevan/h-perforatum-network-tox-release}
 }
 ```
