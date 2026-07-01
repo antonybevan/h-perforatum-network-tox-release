@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Code License: MIT](https://img.shields.io/badge/code%20license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Docs License: CC BY 4.0](https://img.shields.io/badge/docs%20%26%20data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox)
+[![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release)
 
 Complete, reproducible research pipeline, data, and manuscript source for a **controlled methodological audit of network-proximity statistics**. Using two constituents of *Hypericum perforatum* with an extreme target-count asymmetry, we show that a proximity Z-score is a calibrated *evidence* statistic whose *magnitude* should not be read as a cross-compound *effect-size* ranking when target counts differ greatly — and we recommend reporting an explicit effect size (**perturbation efficiency**) alongside it.
 
@@ -34,7 +34,7 @@ Hyperforin is topologically *closer* by closest-path distance (smaller *d*c) yet
 ## Reproducibility
 
 ```bash
-git clone https://github.com/antonybevan/h-perforatum-network-tox
+git clone https://github.com/antonybevan/h-perforatum-network-tox-release
 cd h-perforatum-network-tox
 pip install -r requirements-lock.txt          # pinned versions (Python 3.12)
 ```
@@ -118,6 +118,6 @@ If you use this pipeline or data, please cite (update with the published DOI on 
   author  = {Bevan, Antony},
   journal = {(under review, Scientific Reports)},
   year    = {2026},
-  note    = {Code: https://github.com/antonybevan/h-perforatum-network-tox}
+  note    = {Code: https://github.com/antonybevan/h-perforatum-network-tox-release}
 }
 ```

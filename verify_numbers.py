@@ -49,7 +49,7 @@ for rel in required_paths:
     check((ROOT/rel).exists(), f"{rel} exists")
 lock_text = read_text(ROOT/"reproducibility.lock.yml")
 check("Rscript R/fig8_opregime.R" in lock_text, "reproducibility lock includes operating-regime figure script")
-repo_url = "https://github.com/antonybevan/h-perforatum-network-tox"
+repo_url = "https://github.com/antonybevan/h-perforatum-network-tox-release"
 for rel in ["README.md", "CITATION.cff", "manuscript/sections/code_availability.tex", "manuscript/sections/data_availability.tex"]:
     check(repo_url in read_text(ROOT/rel), f"{rel} contains canonical GitHub URL")
 

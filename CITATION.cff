@@ -5,8 +5,8 @@ type: software
 authors:
   - family-names: "Bevan"
     given-names: "Antony"
-repository-code: "https://github.com/antonybevan/h-perforatum-network-tox"
-url: "https://github.com/antonybevan/h-perforatum-network-tox"
+repository-code: "https://github.com/antonybevan/h-perforatum-network-tox-release"
+url: "https://github.com/antonybevan/h-perforatum-network-tox-release"
 abstract: >-
   Reproducible pipeline for a controlled audit of network-proximity statistics.
   A proximity Z-score is a calibrated evidence statistic whose magnitude is not a
