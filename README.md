@@ -6,29 +6,31 @@
 [![Docs License: CC BY 4.0](https://img.shields.io/badge/docs%20%26%20data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release)
 
-Complete, reproducible research pipeline, data, and manuscript source for a **controlled methodological audit of network-proximity statistics**. Using two constituents of *Hypericum perforatum* with an extreme target-count asymmetry, we show that a proximity Z-score is a calibrated *evidence* statistic whose *magnitude* should not be read as a cross-compound *effect-size* ranking when target counts differ greatly — and we recommend reporting an explicit effect size (**perturbation efficiency**) alongside it.
+Complete, reproducible research pipeline, data, and manuscript source for a **controlled methodological audit of network-proximity rankings under target-count asymmetry**. The manuscript separates three quantities that are easy to conflate: raw topological effect (`d_c`), standardized evidence (`Z`), and mean per-target random-walk influence (`E`). The central claim is not that proximity is biased, but that cross-compound ranking by Z-score magnitude can diverge from raw effect-size ranking because the larger target set has a sharper null.
 
 ---
 
 ## Scientific context
 
-A network-proximity Z-score standardises an observed target–disease distance against a size- and degree-matched random null (Guney et al. 2016; Menche et al. 2015). Because a Z-score is an effect divided by a null standard deviation, and that standard deviation shrinks with target count (≈ |T|^−1/2, the law of large numbers), **Z-score magnitude is not comparable across compounds with very different target counts.** This is the distinction between statistical significance and effect size emphasised by the ASA statement (Wasserstein & Lazar 2016) — *expected precision, not a defect of any metric.* We confirm the |T|^−1/2 scaling for shortest-path, random-walk, and expression-weighted influence alike.
+A network-proximity Z-score standardizes an observed target-disease distance against a size- and degree-matched random null (Guney et al. 2016; Menche et al. 2015). Because a Z-score is an effect divided by a null standard deviation, and that standard deviation shrinks with target count (approximately `|T|^-1/2`, the law of large numbers), **Z-score magnitude should not be read as a cross-compound effect-size ranking when target counts differ greatly.** This is expected precision, not a defect of proximity. We confirm the `|T|^-1/2` scaling for shortest-path, random-walk, and expression-weighted influence alike.
 
-We therefore recommend reporting an effect size alongside the evidence Z-score. **Perturbation efficiency** is the mean per-target random-walk-with-restart influence on the disease module — by linearity of the walk, exactly the size-normalised propagated influence. It is an effect-size **complement** to the Z-score, not a replacement.
+We therefore report an explicit effect size alongside standardized evidence. **Perturbation efficiency** is the mean per-target random-walk-with-restart influence on the disease module; by linearity of the walk, it equals the average single-target influence. It is an effect-size complement to the Z-score, not a replacement, and its own Z-score is subject to the same null-SD shrinkage.
 
-*H. perforatum* provides a deliberately adversarial stress-test pair (not a representative sample): Hyperforin (10 targets) and Quercetin (62), two constituents considered here because they differ ~6× in target count. Hyperforin is a **mechanistic positive control** — the PXR-activating, cytochrome-P450/transporter-inducing constituent behind St John's Wort's hepatic drug–drug interactions (Moore et al. 2000) — though *not* itself an established intrinsic hepatotoxin (LiverTox). Quercetin is used as the high-target-count comparator, not as a DILI outcome control.
+The empirical pair is a deliberately high-contrast diagnostic example, not a representative compound sample: Hyperforin (10 targets) and Quercetin (62), two *Hypericum perforatum* constituents with about a 6-fold target-count ratio. Hyperforin is the PXR-activating, CYP/transporter-inducing constituent behind St John's Wort's hepatic drug-drug interactions, making it a mechanistic positive control for engagement of the DILI module's xenobiotic-metabolism axis; it is not claimed to be an intrinsic hepatotoxin. Quercetin is the high-target-count comparator, not a DILI outcome control.
+
+A degree-controlled liver-network calibration benchmark then asks when the `|T|^-1/2` null-precision law is large enough to reverse raw-distance and Z-score rankings. Material reversal is a located, conditional regime: in this network it appears when the smaller set is above the 90th percentile of probe-pair margins, while unconditional raw/Z rank discordance is about 12% at the Hyperforin/Quercetin target-count ratio.
 
 ### Key numbers (STRING ≥900 liver LCC)
 
-| Compound | Targets | Closest distance *d*c | Proximity *Z* | RWR influence *Z* | Perturbation efficiency *E* |
-|----------|---------|------------------------|----------------|--------------------|------------------------------|
-| **Hyperforin** | 10 | **1.30** | −3.86 | +10.12 | **0.1138** |
-| **Quercetin**  | 62 | 1.68 | **−5.44** | +4.55 | 0.0322 |
+| Compound | Targets | Closest distance *d*c | Proximity *Z* | Perturbation efficiency *E* | Direct component | Propagated component |
+|----------|---------|------------------------|----------------|-----------------------------|------------------|----------------------|
+| **Hyperforin** | 10 | **1.30** | −3.86 | **0.1138** | 0.0711 | 0.0427 |
+| **Quercetin**  | 62 | 1.68 | **−5.44** | 0.0322 | 0.0032 | 0.0290 |
 
-Hyperforin is topologically *closer* by closest-path distance (smaller *d*c) yet less *"significant"* (smaller \|*Z*\|): effect size and standardised evidence dissociate, and the Z-ranking reverses across network thresholds while the *d*c ranking does not.
+Hyperforin is topologically closer by closest-path distance (smaller *d*c) yet has the weaker standardized evidence at STRING >=900 (smaller |*Z*|). The raw-distance ranking is stable across the evaluated thresholds, while the proximity-Z evidence ranking reverses.
 
 > [!IMPORTANT]
-> The raw per-target efficiency advantage (~3.5×) is **partly circular**: four of ten Hyperforin targets (ABCB1, CYP2C9, MMP2, NR1I2) are themselves DILI-module genes. A target–disease overlap audit gives a **modest leakage-controlled residual (~1.2–1.9×) with overlapping distributions** (~99.9th percentile against a degree-matched background; does not exceed all random sets). We do **not** claim a clean topological separation, nor that Hyperforin is an intrinsic hepatotoxin.
+> The raw per-target influence advantage (~3.5x) is dominated by direct target-DILI overlap: four of ten Hyperforin targets (ABCB1, CYP2C9, MMP2, NR1I2) are themselves DILI-module genes. The propagated component is more modest (~1.5x; bounded to ~1.2-1.9x across alternative exclusions), remains above a degree-matched background, and overlaps the upper tail of size-matched Quercetin subsets. This is a decomposition of effect size, not a DILI prediction.
 
 ---
 
@@ -64,7 +66,6 @@ Data integrity is anchored by `data/CHECKSUMS.sha256` (`shasum -a 256 -c data/CH
 ├── manuscript/             # LaTeX source (Scientific Reports format) and compiled PDF
 ├── tests/                  # validation suite (113 tests)
 ├── independent_validation/ # audit trail (codex_pass/ + claude_pass/)
-├── validation_cleanroom/   # independent reimplementations for verification
 ├── FIGURES.md              # figure filename-to-LaTeX-number mapping
 ├── reproducibility.lock.yml# pinned environment specification
 └── requirements-lock.txt   # pinned Python dependencies
@@ -94,10 +95,10 @@ Full audit reports in `independent_validation/claude_pass/`. See `MASTER_AUDIT_D
 2. **Proximity** — closest distance *d*c (Guney et al. 2016), degree-matched permutation *Z* (*n* = 1000, seed 42), conservative empirical (*r*+1)/(*n*+1) *p*-values.
 3. **Perturbation efficiency** — mean per-target RWR influence (column-normalised *W = A D*⁻¹, restart α = 0.15; Köhler et al. 2008), equal by linearity to the size-normalised joint influence.
 4. **Expression weighting** — destination-node liver-TPM transition weighting (sensitivity analysis).
-5. **Target–disease overlap (leakage) audit** — removes circular target–module overlap; compares against a global degree-matched background and size-matched Quercetin subsets.
+5. **Direct/propagated decomposition** — separates mass on target-DILI overlap nodes from propagated influence; compares the propagated component against a global degree-matched background and size-matched Quercetin subsets.
 6. **Guney fidelity** — revalidation against the canonical `emreg00/toolbox` under fixed-disease and two-sided nulls.
-7. **Chemical-similarity control** — maximum Tanimoto (ECFP4) to DILIrank 2.0 reference drugs (both compounds < 0.4, excluding structural confounding).
-8. **Operating-regime benchmark** — degree-controlled random probes quantify when target-count asymmetry can reverse raw-distance and Z-score rankings; no toxicity outcome is modelled.
+7. **Chemical-similarity control** — maximum Tanimoto (ECFP4) to DILIrank 2.0 reference drugs (both compounds < 0.4), arguing against close structural-analogue confounding within that reference set.
+8. **Operating-regime benchmark** — degree-controlled random probes quantify when target-count asymmetry can reverse raw-distance and Z-score rankings; no toxicity outcome is modeled.
 
 ---
 
