@@ -75,6 +75,11 @@ R/.Rhistory
 # LaTeX artifacts
 manuscript/*.aux
 manuscript/*.bbl
+# ...except the committed bibliographies, which are part of the submission
+# source (bundled into the archives and needed to rebuild them from a clean
+# clone without a bibtex round-trip).
+!manuscript/main.bbl
+!manuscript/main_anonymous.bbl
 manuscript/*.blg
 manuscript/*.log
 manuscript/*.out

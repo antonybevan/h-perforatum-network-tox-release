@@ -94,14 +94,15 @@ def check_archive(name, expected_main, expected_bbl):
             fail(f"{name}: flattened duplicate top-level .tex {n}")
 
     # 4. currency: bundled main.tex/main.bbl match committed source
-    if blobs.get("main.tex") == (MANU / expected_main).read_bytes():
-        ok(f"{name}: main.tex matches committed {expected_main}")
-    else:
-        fail(f"{name}: main.tex does NOT match committed {expected_main} (stale archive)")
-    if blobs.get("main.bbl") == (MANU / expected_bbl).read_bytes():
-        ok(f"{name}: main.bbl matches committed {expected_bbl}")
-    else:
-        fail(f"{name}: main.bbl does NOT match committed {expected_bbl} (stale archive)")
+    for member, src in [("main.tex", expected_main), ("main.bbl", expected_bbl)]:
+        src_path = MANU / src
+        if not src_path.is_file():
+            fail(f"{name}: committed source {src} is missing (cannot verify archive currency)")
+            continue
+        if blobs.get(member) == src_path.read_bytes():
+            ok(f"{name}: {member} matches committed {src}")
+        else:
+            fail(f"{name}: {member} does NOT match committed {src} (stale archive)")
 
     # 5. stale values in .tex members
     stale_hit = False
