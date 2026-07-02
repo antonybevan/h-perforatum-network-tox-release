@@ -3,7 +3,7 @@
 [![Python 3.12](https://img.shields.io/badge/python-3.12-blue.svg)](https://www.python.org/)
 [![Code License: MIT](https://img.shields.io/badge/code%20license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Docs License: CC BY 4.0](https://img.shields.io/badge/docs%20%26%20data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
-[![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox)
+[![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release)
 
 Complete, reproducible research pipeline, data, and manuscript source for a **controlled methodological audit of network-proximity statistics**. A degree-controlled calibration benchmark (20,000 probes per size, 500,000 cross-size pairs) characterizes the operating regime in which the |T|^−1/2 null-precision law can reverse Z-score rankings relative to raw topological effect. Two *Hypericum perforatum* constituents with a 6.2× target-count ratio fall within this characterized regime as a worked biological instance. We recommend reporting an explicit effect size (**perturbation efficiency**, the mean per-target RWR influence) alongside the evidence Z-score, and decomposing it into direct target–disease overlap and propagated influence.
 
@@ -21,8 +21,8 @@ We therefore recommend reporting an effect size alongside the evidence Z-score. 
 
 | Compound | Targets | Closest distance *d*c | Proximity *Z* | RWR influence *Z* | Perturbation efficiency *E* |
 |----------|---------|------------------------|----------------|--------------------|------------------------------|
-| **Hyperforin** | 10 | **1.30** | −3.86 | +10.12 | **0.1138** |
-| **Quercetin**  | 62 | 1.68 | **−5.44** | +4.55 | 0.0322 |
+| **Hyperforin** | 10 | **1.30** | −3.86 | +10.77 | **0.1138** |
+| **Quercetin**  | 62 | 1.68 | **−5.44** | +4.58 | 0.0322 |
 
 Hyperforin is topologically *closer* by closest-path distance (smaller *d*c) yet less *"significant"* (smaller |*Z*|): effect size and standardized evidence dissociate, and the Z-ranking reverses across network thresholds while the *d*c ranking does not.
 
@@ -61,7 +61,7 @@ Data integrity is anchored by `data/CHECKSUMS.sha256` (`shasum -a 256 -c data/CH
 ├── data/                   # committed processed inputs + raw sources + CHECKSUMS.sha256
 ├── results/tables/         # computed tables (proximity / RWR / EWI / leakage / operating regime)
 ├── manuscript/             # LaTeX source (Scientific Reports format) and compiled PDF
-├── tests/                  # validation suite (113 tests)
+├── tests/                  # validation suite (unit + invariant/oracle tests)
 ├── independent_validation/ # audit trail (codex_pass/ + claude_pass/)
 ├── validation_cleanroom/   # independent reimplementations for verification
 ├── FIGURES.md              # figure filename-to-LaTeX-number mapping
@@ -71,17 +71,17 @@ Data integrity is anchored by `data/CHECKSUMS.sha256` (`shasum -a 256 -c data/CH
 
 ## Audit & Reproducibility
 
-This repository has passed a full adversarial multi-agent audit. Key verification:
+This repository has passed a full adversarial multi-agent audit. All gates below are run in a clean Python 3.12 environment installed from `requirements-lock.txt`:
 
 | Gate | Command | Result |
 |---|---|---|
 | Number consistency | `python verify_numbers.py` | PASS |
 | Data integrity | `python scripts/validate_data_integrity.py` | ALL CHECKS PASSED |
-| Unit tests | `python -m pytest -q` | 113 passed |
-| Checksums | `shasum -a 256 -c data/CHECKSUMS.sha256` | 45/45 OK |
-| Full pipeline | `python scripts/run_pipeline.py` | 20/21 steps pass (1 expected permutation variance) |
+| Unit tests | `python -m pytest -q` | PASS (locked Python 3.12 env) |
+| Checksums | `shasum -a 256 -c data/CHECKSUMS.sha256` | PASS |
 | Reviewer evidence | `python REVIEWER_EVIDENCE.py` | PASS |
 | Guney fidelity | `python GUNEY_FIDELITY_check.py` | PASS |
+| Full pipeline | `python scripts/run_pipeline.py` | end-to-end regeneration; run as the clean-clone release gate (one permutation step reproduces within Monte-Carlo variance) |
 
 Full audit reports in `independent_validation/claude_pass/`. See `MASTER_AUDIT_DASHBOARD.md` for the consolidated verdict.
 
