@@ -62,6 +62,9 @@ Data integrity is anchored by `data/CHECKSUMS.sha256` (`shasum -a 256 -c data/CH
 ├── results/tables/         # computed tables (proximity / RWR / EWI / leakage / operating regime)
 ├── manuscript/             # LaTeX source (Scientific Reports format) and compiled PDF
 ├── tests/                  # validation suite (unit + invariant/oracle tests)
+├── figures/                # publication-ready figures (PDF + TIFF)
+├── docs/                   # data-flow documentation
+├── .github/                # CI workflows + issue/PR templates
 ├── FIGURES.md              # figure filename-to-LaTeX-number mapping
 ├── reproducibility.lock.yml# pinned environment specification
 └── requirements-lock.txt   # pinned Python dependencies

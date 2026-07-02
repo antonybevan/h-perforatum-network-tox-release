@@ -2,7 +2,7 @@
 
 Network-medicine manuscript: "Separating effect size from statistical evidence in network-proximity rankings under target-count asymmetry: a controlled liver-interactome audit."
 
-## Claim Ladder (from CLAUDE.md)
+## Claim Ladder
 
 **May claim:**
 - Proximity Z-scores are valid evidence statistics
@@ -30,8 +30,8 @@ Network-medicine manuscript: "Separating effect size from statistical evidence i
 
 ```
 python verify_numbers.py                     # Number consistency + forbidden-language scan
-python -m pytest -q                          # 113 tests
-shasum -a 256 -c data/CHECKSUMS.sha256       # Data integrity (45 entries)
+python -m pytest -q                          # 227 tests
+shasum -a 256 -c data/CHECKSUMS.sha256       # Data integrity (39 entries)
 python scripts/run_pipeline.py               # Full 22-step pipeline
 python REVIEWER_EVIDENCE.py                  # RWR linearity, variance shrinkage
 python GUNEY_FIDELITY_check.py               # Canonical proximity revalidation
