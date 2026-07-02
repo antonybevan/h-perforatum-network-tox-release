@@ -51,9 +51,34 @@ def test_network_lcc_extraction():
     G = nx.Graph()
     G.add_edges_from([('A', 'B'), ('B', 'C')])
     G.add_edges_from([('X', 'Y')])
-    
+
     lcc = max(nx.connected_components(G), key=len)
     G_lcc = G.subgraph(lcc).copy()
-    
+
     assert G_lcc.number_of_nodes() == 3
     assert 'X' not in G_lcc.nodes()
+
+
+def test_largest_component_unique_giant(monkeypatch):
+    """Patch 7: unique giant component is picked regardless of iteration order."""
+    from network_tox.core.network import _largest_component
+
+    giant = {"A", "B", "C"}
+    small = {"X", "Y"}
+    # Selection must not depend on the order components are yielded.
+    assert _largest_component([giant, small]) == giant
+    assert _largest_component([small, giant]) == giant
+
+
+def test_largest_component_deterministic_tie_break():
+    """Patch 7: equal-size components resolve deterministically (smallest label).
+
+    Without a tie-break the winner depends on component iteration order; the
+    (len, min) key makes the pick stable and order-independent.
+    """
+    from network_tox.core.network import _largest_component
+
+    comp_a = {"m", "n"}   # min label "m"
+    comp_b = {"a", "z"}   # min label "a" -> should win the tie
+    assert _largest_component([comp_a, comp_b]) == comp_b
+    assert _largest_component([comp_b, comp_a]) == comp_b

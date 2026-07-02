@@ -17,6 +17,8 @@ import sys
 project_root = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(project_root / 'src'))
 
+from network_tox.analysis.shortest_path import calculate_shortest_path
+
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -67,29 +69,6 @@ def write_committed_stable_csv(df, output_file):
                         pass
                 out_row[field] = value
             writer.writerow(out_row)
-
-
-def calculate_shortest_path(G, targets, disease_genes):
-    """Calculate mean minimum shortest path distance (d_c).
-
-    Uses a single unweighted multi-source BFS from the (fixed) disease set to
-    obtain each node's distance to its NEAREST disease gene, then averages over
-    the targets. This is mathematically identical to the per-target BFS it
-    replaces (unweighted shortest-path lengths are exact integers) but avoids the
-    O(|T| x |D|) recomputation; it reproduces the committed d_c and Z exactly.
-    """
-    targets_in = [t for t in targets if t in G]
-    disease_in = [d for d in disease_genes if d in G]
-
-    if not targets_in or not disease_in:
-        return np.nan
-
-    dist_to_disease = nx.multi_source_dijkstra_path_length(
-        G, disease_in, weight=lambda u, v, d: 1
-    )
-    distances = [dist_to_disease[t] for t in targets_in if t in dist_to_disease]
-
-    return np.mean(distances) if distances else np.nan
 
 
 def get_degree_matched_random(G, targets, n_random=1):

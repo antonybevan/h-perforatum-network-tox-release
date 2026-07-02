@@ -5,6 +5,8 @@ Implements tissue-constrained influence propagation using transition-matrix
 weighting based on protein expression.
 """
 
+import warnings
+
 import numpy as np
 import networkx as nx
 from scipy import sparse
@@ -177,12 +179,22 @@ def run_ewi_from_operator(
     p = r.copy()
 
     # Iterate until convergence (standard RWR iteration)
+    diff = np.inf
     for iteration in range(max_iter):
         p_new = (1 - restart_prob) * W_prime.dot(p) + restart_prob * r
         diff = np.sum(np.abs(p_new - p))
         p = p_new
         if diff < tol:
             break
+    else:
+        # Loop exhausted max_iter without meeting tol: surface the residual so a
+        # non-converged state is never silently returned as a "result".
+        warnings.warn(
+            f"Expression-weighted RWR did not converge in {max_iter} iterations "
+            f"(L1 residual={diff:.2e} >= tol={tol:.1e}); returning last iterate.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
 
     return {nodes[i]: float(p[i, 0]) for i in range(n)}
 

@@ -5,6 +5,22 @@ import pandas as pd
 import gzip
 
 
+def _largest_component(components):
+    """Pick the largest connected component with a deterministic tie-break.
+
+    ``max(components, key=len)`` alone leaves the choice between two equal-size
+    components dependent on graph iteration order. Among the largest components
+    we pick the one whose smallest node label is smallest, making the selection
+    reproducible regardless of node insertion order. On these networks the giant
+    component is unique, so this is a no-op on the published data and only
+    hardens against future ties.
+    """
+    comps = list(components)
+    max_size = max(len(c) for c in comps)
+    largest = [c for c in comps if len(c) == max_size]
+    return min(largest, key=min)
+
+
 def load_string_network(threshold, links_file, info_file):
     """
     Load STRING network at specified confidence threshold.
@@ -33,7 +49,7 @@ def load_string_network(threshold, links_file, info_file):
     G.add_edges_from(zip(df['gene1'], df['gene2']))
     
     # Extract LCC
-    lcc = max(nx.connected_components(G), key=len)
+    lcc = _largest_component(nx.connected_components(G))
     return G.subgraph(lcc).copy()
 
 
@@ -54,7 +70,7 @@ def filter_to_tissue(G, tissue_genes):
     if len(G_tissue) > 0:
         components = list(nx.connected_components(G_tissue))
         if len(components) > 1:
-            lcc = max(components, key=len)
+            lcc = _largest_component(components)
             return G_tissue.subgraph(lcc).copy()
     
     return G_tissue

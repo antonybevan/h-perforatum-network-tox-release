@@ -1,5 +1,7 @@
 """Random Walk with Restart (RWR) analysis."""
 
+import warnings
+
 import numpy as np
 import networkx as nx
 from scipy import sparse
@@ -62,12 +64,22 @@ def run_rwr_from_operator(W, nodes, node_idx, seeds, restart_prob=0.15, tol=1e-6
     p = r.copy()
 
     # Iterate
+    diff = np.inf
     for _ in range(max_iter):
         p_new = (1 - restart_prob) * W.dot(p) + restart_prob * r
         diff = np.sum(np.abs(p_new - p))
         p = p_new
         if diff < tol:
             break
+    else:
+        # Loop exhausted max_iter without meeting tol: surface the residual so a
+        # non-converged state is never silently returned as a "result".
+        warnings.warn(
+            f"RWR did not converge in {max_iter} iterations "
+            f"(L1 residual={diff:.2e} >= tol={tol:.1e}); returning last iterate.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
 
     return {nodes[i]: float(p[i, 0]) for i in range(n)}
 
