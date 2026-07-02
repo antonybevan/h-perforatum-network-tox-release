@@ -7,8 +7,8 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage{mathptmx}
-\usepackage{microtype}              % professional kerning / justification
+\usepackage{lmodern}
+\usepackage[protrusion=true,expansion=false]{microtype}
 \usepackage[margin=2.5cm]{geometry}
 \usepackage{graphicx}
 \usepackage{booktabs}
@@ -23,20 +23,14 @@
 \usepackage{setspace}
 \usepackage{multirow}
 \usepackage{lineno}                 % line numbers for review
-\usepackage{fancyhdr}              % running header
 
 \onehalfspacing                     % cleaner than double; still review-friendly
+\emergencystretch=3em
 
 % --- professional caption styling: bold "Table N.", smaller text ---
 \captionsetup{labelfont={bf},font=small,labelsep=period}
 
-% --- running header ---
-\setlength{\headheight}{14pt}
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[L]{\footnotesize\itshape Separating effect size from statistical evidence}
-\fancyhead[R]{\footnotesize\thepage}
-\renewcommand{\headrulewidth}{0.4pt}
+\pagestyle{plain}                   % Arabic page numbers in the footer
 
 % --- make lineno cooperate with amsmath display environments ---
 \newcommand*\patchAmsMathEnvironmentForLineno[1]{%

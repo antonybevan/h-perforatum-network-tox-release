@@ -104,3 +104,15 @@ MASTER_DOSSIER.md
 REPO_UNDERSTANDING_REPORT.md
 REVIEWER_RESPONSE_STRATEGY.md
 REVISED_MANUSCRIPT.md
+
+# Local Markdown scratch/draft notes. Public documentation, audit reports,
+# manifests, and response-to-reviewers files should be added explicitly.
+NOTES.md
+TODO.md
+TODO_*.md
+*_NOTES.md
+*_DRAFT.md
+*_SCRATCH.md
+scratch*.md
+local*.md
+PRIVATE_*.md
