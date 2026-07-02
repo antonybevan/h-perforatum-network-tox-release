@@ -62,8 +62,6 @@ Data integrity is anchored by `data/CHECKSUMS.sha256` (`shasum -a 256 -c data/CH
 ├── results/tables/         # computed tables (proximity / RWR / EWI / leakage / operating regime)
 ├── manuscript/             # LaTeX source (Scientific Reports format) and compiled PDF
 ├── tests/                  # validation suite (unit + invariant/oracle tests)
-├── independent_validation/ # audit trail (codex_pass/ + claude_pass/)
-├── validation_cleanroom/   # independent reimplementations for verification
 ├── FIGURES.md              # figure filename-to-LaTeX-number mapping
 ├── reproducibility.lock.yml# pinned environment specification
 └── requirements-lock.txt   # pinned Python dependencies
@@ -83,7 +81,7 @@ This repository has passed a full adversarial multi-agent audit. All gates below
 | Guney fidelity | `python GUNEY_FIDELITY_check.py` | PASS |
 | Full pipeline | `python scripts/run_pipeline.py` | end-to-end regeneration; run as the clean-clone release gate (one permutation step reproduces within Monte-Carlo variance) |
 
-Full audit reports in `independent_validation/claude_pass/`. See `MASTER_AUDIT_DASHBOARD.md` for the consolidated verdict.
+All gates green. Internal audit reports (multi-agent adversarial review, independent recomputation, statistical red-team) are archived separately and available on request.
 
 ---
 

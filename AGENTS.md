@@ -37,6 +37,3 @@ python REVIEWER_EVIDENCE.py                  # RWR linearity, variance shrinkage
 python GUNEY_FIDELITY_check.py               # Canonical proximity revalidation
 ```
 
-## Audit
-
-Full adversarial audit in `independent_validation/claude_pass/`. Start with `MASTER_AUDIT_DASHBOARD.md`.

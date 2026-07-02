@@ -93,6 +93,9 @@ research/
 archive/
 manuals/
 
+# Audit working files (archived separately)
+independent_validation/
+
 # Pytest cache
 .pytest_cache/
 
