@@ -53,17 +53,23 @@ Siyu Chen, Xue Wang, Xinran Ye, Qinqin Wang, Xin Sun, Chunyan Ma, Zhidong Yuan, 
 \newblock \emph{Toxicological Sciences}, 190\penalty0 (1):\penalty0 68--80, 2022.
 \newblock \doi{10.1093/toxsci/kfac098}.
 
-\bibitem[K{\"o}hler et~al.(2008)K{\"o}hler, Bauer, Horn, and Robinson]{Kohler2008}
-Sebastian K{\"o}hler, Sebastian Bauer, Denise Horn, and Peter~N Robinson.
-\newblock Walking the interactome for prioritization of candidate disease genes.
-\newblock \emph{The American Journal of Human Genetics}, 82\penalty0 (4):\penalty0 949--958, 2008.
-\newblock \doi{10.1016/j.ajhg.2008.02.013}.
-
 \bibitem[Cowen et~al.(2017)Cowen, Ideker, Raphael, and Sharan]{Cowen2017}
 Lenore Cowen, Trey Ideker, Benjamin~J Raphael, and Roded Sharan.
 \newblock Network propagation: a universal amplifier of genetic associations.
 \newblock \emph{Nature Reviews Genetics}, 18\penalty0 (9):\penalty0 551--562, 2017.
 \newblock \doi{10.1038/nrg.2017.38}.
+
+\bibitem[Erten et~al.(2011)Erten, Bebek, Ewing, and Koyut{\"u}rk]{Erten2011}
+Sinan Erten, G{\"u}rkan Bebek, Rob~M Ewing, and Mehmet Koyut{\"u}rk.
+\newblock {DADA}: Degree-aware algorithms for network-based disease gene prioritization.
+\newblock \emph{BioData Mining}, 4:\penalty0 19, 2011.
+\newblock \doi{10.1186/1756-0381-4-19}.
+
+\bibitem[K{\"o}hler et~al.(2008)K{\"o}hler, Bauer, Horn, and Robinson]{Kohler2008}
+Sebastian K{\"o}hler, Sebastian Bauer, Denise Horn, and Peter~N Robinson.
+\newblock Walking the interactome for prioritization of candidate disease genes.
+\newblock \emph{The American Journal of Human Genetics}, 82\penalty0 (4):\penalty0 949--958, 2008.
+\newblock \doi{10.1016/j.ajhg.2008.02.013}.
 
 \bibitem[Chen et~al.(2016)Chen, Suzuki, Thakkar, Yu, Hu, and Tong]{Chen2016}
 Minjun Chen, Ayako Suzuki, Shraddha Thakkar, Ke~Yu, Chao Hu, and Weida Tong.
@@ -82,12 +88,6 @@ Gerald Maggiora, Martin Vogt, Dagmar Stumpfe, and J{\"u}rgen Bajorath.
 \newblock Molecular similarity in medicinal chemistry.
 \newblock \emph{Journal of Medicinal Chemistry}, 57\penalty0 (8):\penalty0 3186--3204, 2014.
 \newblock \doi{10.1021/jm401411z}.
-
-\bibitem[Erten et~al.(2011)Erten, Bebek, Ewing, and Koyut{\"u}rk]{Erten2011}
-Sinan Erten, G{\"u}rkan Bebek, Rob~M Ewing, and Mehmet Koyut{\"u}rk.
-\newblock {DADA}: Degree-aware algorithms for network-based disease gene prioritization.
-\newblock \emph{BioData Mining}, 4:\penalty0 19, 2011.
-\newblock \doi{10.1186/1756-0381-4-19}.
 
 \bibitem[Barel and Herwig(2020)]{Barel2020}
 Gal Barel and Ralf Herwig.

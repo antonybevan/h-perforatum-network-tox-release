@@ -2,142 +2,171 @@
 
 **Manuscript:** *Separating effect size from statistical evidence in network-proximity rankings under target-count asymmetry: a controlled liver-interactome audit* (formerly submitted under a target-count-bias correction framing).
 
-We thank both reviewers for a rigorous and, frankly, decisive critique. Reviewer 2's central objection — that target-count-dependent variance shrinkage is *expected precision*, not a statistical flaw — is correct, and we have rebuilt the manuscript around it rather than defending the original framing. Reviewer 1's requests for sensitivity analyses, a corrected definition of the efficiency metric, motivation, and removal of AI-style figure text are all addressed with new, fully reproducible analyses.
+We thank the editor and both reviewers for their careful assessment. The comments substantially improved the manuscript. In particular, Reviewer 2 correctly noted that target-count-dependent shrinkage of the null variance is expected statistical precision rather than a flaw in proximity Z-scores. We have therefore reframed the manuscript around the distinction between standardized evidence and raw effect-size ranking, and we have removed language suggesting that proximity Z-scores are biased or that perturbation efficiency replaces them.
 
 The revision makes five substantive changes:
-1. **The thesis is reframed** from "proximity Z-scores are biased and perturbation efficiency resolves this" to "Z-scores are valid *evidence* statistics whose *magnitude* should not be read as a cross-compound *effect-size* ranking under target-count asymmetry." This is consistent with Guney et al. (2016), Menche et al. (2015), and the ASA statement on p-values (Wasserstein & Lazar, 2016).
-2. **We separate direct target–disease overlap from propagated influence** (new §2.4, Table 3, Figure 6). It shows the raw ~3.5× per-target advantage is 62% direct overlap; the genuinely propagated advantage is a modest ~1.5× (1.2–1.9× across alternative exclusions), corroborated by S_AB and direct-connectivity measures.
-3. **We add the requested sensitivity analyses** (restart probability, expression floor) and a formal null-variance scaling result.
-4. **We revalidated the proximity metric against Guney's published toolbox code** (`emreg00/toolbox`) and confirm our `d_c` and z-scores are faithful reimplementations, with the core result robust to his exact degree-binning and two-sided null.
-5. **We added a degree-controlled operating-regime benchmark** showing that the `|T|^{-1/2}` null-precision law is reproduced within the liver network across the DILI module and size-matched pseudo-modules, while material rank reversal is rare for generic probes and occurs only in a located high-margin regime. The benchmark uses 20,000 probes per target-set size and 500,000 cross-size probe pairs.
 
-All new numbers are reproducible from the repository scripts (`REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, `GUNEY_FIDELITY_check.py`).
+1. **Reframed thesis.** The manuscript now states that proximity Z-scores are valid evidence statistics, but that their magnitude should not be interpreted as a cross-compound effect-size ranking when target counts differ strongly. This framing is consistent with Guney et al. (2016), Menche et al. (2015), and the ASA statement on p-values (Wasserstein and Lazar, 2016).
+2. **Direct versus propagated influence.** We added a new analysis separating direct target-DILI overlap from propagated random-walk influence (Results Section 2.4, Table 3, Figure 6). The raw approximately 3.5-fold per-target influence advantage is 62% direct overlap; the propagated residual is more modest, approximately 1.5-fold and 1.2- to 1.9-fold across alternative exclusions.
+3. **Requested sensitivity analyses.** We added restart-probability sensitivity, expression-floor sensitivity, and a formal null-variance scaling audit.
+4. **Guney-fidelity revalidation.** We revalidated the closest-distance proximity implementation against Guney-style degree binning and a two-sided null construction, confirming that the observed closest distances and the effect/evidence dissociation are not artifacts of the local implementation.
+5. **Operating-regime benchmark.** We added a degree-controlled liver-network calibration benchmark using 20,000 probes per target-set size and 500,000 cross-size probe pairs. This shows that the approximately \(|T|^{-1/2}\) null-precision law holds across the DILI module and size-matched pseudo-modules, and that material rank reversal is conditional rather than a generic outcome.
+
+All new results are reproducible from the deposited scripts, including `REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, and `GUNEY_FIDELITY_check.py`.
 
 ---
 
 ## Editor
 
-### E.1 Code deposition in a DOI-issuing repository and a Code Availability statement.
-Done. The complete analysis code, curated input data, and figure-generation scripts are archived in a public GitHub repository; the tagged publication snapshot will be deposited to **Zenodo**, which issues a citable DOI. The manuscript now carries a dedicated **Code Availability** section (`sections/code_availability.tex`) listing the repository URL, the planned Zenodo archival step, the language/package versions (Python 3.12, NetworkX 3.6, NumPy 2.5, pandas 2.3, SciPy 1.18, RDKit 2026.03, R 4.6, ggplot2 4.0), and the entry-point scripts for each analysis. The code is released under MIT; manuscript text, figures, and data are released under CC-BY-4.0, and every headline number in the manuscript is regenerated by a single committed pipeline (`scripts/run_pipeline.py`) plus the figure scripts in `R/`. *(Author action before final submission: mint the Zenodo DOI from the tagged release and add the DOI to the Code Availability section.)*
+### E.1 Code deposition in a DOI-issuing repository and Code Availability statement.
 
----
-
-## Reviewer 2
-
-### 2.1 "The dependence of proximity Z-scores on target-set size is expected precision, not a bias."
-**We agree, and this is now the foundation of the paper.** We have removed language describing variance shrinkage as a defect or as something corrected by a new metric. A Z-score is `Z = (M_obs − μ_null)/σ_null`; with more targets the averaged statistic has a smaller `σ_null`, so a given effect becomes more significant. Per the ASA statement (Wasserstein & Lazar 2016), "statistical significance does not measure the size of an effect." We now state explicitly that **Quercetin's stronger proximity Z reflects stronger standardized evidence, not greater topological proximity** — two different and individually correct estimands.
-
-We formalize the shrinkage as a result rather than a complaint. Drawing random seed sets of increasing size and measuring the null standard deviation of per-target influence, we obtain `σ_null ∝ |T|^{−0.477}` (log–log fit; theoretical −1/2):
-
-| \|T\| | 5 | 10 | 20 | 40 | 62 |
-|---|---|---|---|---|---|
-| null SD | 0.00931 | 0.00677 | 0.00594 | 0.00350 | 0.00278 |
-
-This is the Law of Large Numbers operating on an averaged statistic, and it is **universal across metrics** — our audit shows the Hyperforin/Quercetin null-SD ratio remains close to the expected √(62/10)=2.49 across metrics (at STRING ≥900: shortest-path 2.57, RWR 2.45, EWI 2.47; Table S3). Across the two evaluated network thresholds, the ranges are 2.40–2.57 for shortest-path, 2.45–3.04 for RWR, and 2.47–2.93 for EWI. We use this to motivate reporting effect sizes alongside evidence, exactly as the reviewer recommends.
-
-### 2.2 "Table S9 shows ~2.5× SD shrinkage for RWR and EWI too — so RWR does not keep the variance invariant."
-**Correct; we have deleted the earlier reduced-shrinkage claim for influence propagation.** Our own audit (above) confirms RWR and EWI null SDs shrink at the same √(|T|) rate as shortest-path. RWR is no longer presented as escaping shrinkage. Its role is repositioned: it provides a *different effect-size scale* (propagated disease-module influence), and its Z-score remains an evidence statistic subject to the same scaling. The revised Results and Discussion make this explicit.
-
-### 2.3 "The new method's Z-scores do not replace the old ones; they are just a different distance measure."
-**Agreed.** We no longer present RWR Z-scores as a replacement for proximity Z-scores. The revised framework reports four distinct quantities and states what each is for:
-
-| Quantity | Question it answers | Role |
-|---|---|---|
-| `d_c` (shortest-path) | How close are targets to the disease module? | raw topological effect size |
-| proximity Z | Is that proximity surprising under a matched null? | evidence |
-| RWR per-target influence `E` | How much propagated mass reaches the module per target? | propagated effect size |
-| RWR / EWI Z | Is that influence surprising under a matched null? | evidence |
-
-Perturbation efficiency is positioned as an **effect-size complement**, never a replacement for the Z-score.
-
-### 2.4 "Publication is premature."
-We address this on three fronts. (a) We **narrow the claims** to a controlled, mechanistically-anchored stress-test pair and remove all generalization claims. (b) We **revalidated against Guney's actual code** (§Reviewer 1.5 below and new Supplementary), all at n=1,000, seed 42, ≥100-node degree-binning, DILI module size preserved (|D|=82): our `d_c` reproduces exactly; under the fixed-disease null Quercetin is the more "significant" despite being farther (z −3.86/−5.44 committed; −4.09/−5.34 Guney-binned); under Guney's two-sided null both remain significantly proximal but the dissociation attenuates to near-parity (−3.55/−3.66). Hyperforin is the topologically closer compound in every construction; the evidence dissociation is strongest under the fixed-disease null, which is the configuration relevant to comparing two compounds against one disease module. (c) We **add a leakage audit** that honestly downgrades the headline effect (below). The contribution is now a defensible methodological audit with a worked example, not a claimed new predictor.
+Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot will be deposited in Zenodo before resubmission, and the Zenodo DOI will be inserted into the final Code Availability section. The deposited materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
 
 ---
 
 ## Reviewer 1
 
 ### 1.1 Motivation for the Hyperforin/Quercetin liver system.
-Added to Introduction. The pair is a **deliberate stress test, not a representative sample**: same botanical source (shared exposure/ADME context), a **clean mechanistic prior — a liver-relevant mechanistic positive control rather than an outcome-level toxicity ground truth** (Hyperforin is the established PXR-activating constituent that induces the CYP/transporter machinery and exacerbates DILI-relevant bioactivation via herb–drug interactions — though, per LiverTox, not itself an established intrinsic hepatotoxin; Quercetin is the high-target-count comparator, not a DILI outcome control), and an extreme, naturally occurring target-count asymmetry (10 vs 62). We have replaced the earlier hepatotoxicity overstatement with this mechanistically precise description throughout. It was chosen to expose whether metric *interpretation* remains stable under adversarial target-count asymmetry while holding botanical context constant. We state plainly that it is illustrative and not a basis for population-level performance claims.
+
+We have expanded the Introduction to explain the choice of system. Hyperforin and Quercetin are presented as a deliberately high-contrast diagnostic pair, not as a broadly sampled compound set. They share a botanical source, differ strongly in target count (10 versus 62 targets in the liver LCC), and provide a mechanistically interpretable contrast: Hyperforin is the PXR-activating, CYP/transporter-inducing constituent associated with St John's Wort drug-interaction biology, whereas Quercetin is the high-target-count comparator. We also clarify that Hyperforin is not treated as an established intrinsic hepatotoxin and that the analysis is a controlled methodological audit rather than a DILI-risk prediction study.
 
 ### 1.2 Define DILI at first use.
-Done — "drug-induced liver injury (DILI)" now appears at first mention.
+
+Addressed. The manuscript now defines DILI as drug-induced liver injury at first mention.
 
 ### 1.3 Broken equation references.
-Fixed. These were stray LaTeX line numbers; the Methods now contain numbered equations for the RWR fixed point, the influence sum, and the perturbation-efficiency identity, cross-referenced correctly.
+
+Addressed. The two incorrect equation references were removed. The revised Results/Methods now contain correctly numbered equations for the RWR fixed point, the influence sum, and the perturbation-efficiency identity.
 
 ### 1.4 Formal link between influence `I`, `p(d)`, and efficiency.
-Added as a derived identity. The RWR steady state `p = α[I−(1−α)W]⁻¹ p₀` is **linear in the restart vector** `p₀`. With `p₀(i)=1/|T|` on targets,
-> `E(T,D) = Σ_{d∈D} p_d = (1/|T|) Σ_{t∈T} Σ_{d∈D} p_d^{(t)}`,
 
-i.e. perturbation efficiency **equals the mean per-target influence on the disease module**. We verified this numerically (joint vs mean-of-single-target influence: 0.11380975 vs 0.11380968 for Hyperforin; equal to RWR tolerance). We have removed the inconsistent secondary definition (`I/|T|`) that previously appeared in the figure-generation code.
+Addressed. We now define perturbation efficiency directly from the RWR steady-state probability on disease-module nodes. Because the RWR steady state is linear in the restart vector, with a restart vector uniform over the target set,
 
-### 1.5 Generalization / benchmark on the full DILIrank dataset.
-We have scoped this honestly. Our repository supports curated target sets for the two stress-test compounds only; DILIrank 2.0 (1,336 drugs: 217 vMost-, 351 vLess-, 414 vNo-, 354 Ambiguous-DILI-concern; Olubamiwa et al. 2025) is a **drug-level labeling resource**, not a target-network resource, and benchmarking the metric as a classifier would require curating ChEMBL/DrugBank target sets for hundreds of drugs — beyond this study's controlled-audit scope, and at risk of conflating network perturbation potential with dose, PK, reactivity, and directionality that DILIrank labels encode. We therefore (a) **reframe the manuscript explicitly as a controlled methodological audit**, (b) retain DILIrank only for the chemical-similarity negative control (which it already serves), and (c) identify a properly designed external benchmark — `logit(DILI) = β₀ + β₁E + β₂|T| + β₃k̄ + β₄(target–DILI overlap)`, testing whether `E` adds signal beyond target count and degree — as clearly delimited future work. We prefer this to shipping an underpowered classifier.
+> `E(T,D) = sum_{d in D} p_d = (1/|T|) sum_{t in T} sum_{d in D} p_d^{(t)}`.
 
-### 1.6 Quantify the variance shrinkage for RWR.
-On measurement, RWR shrinkage is **not smaller** (§2.1/2.2): the STRING ≥900 null-SD ratio is 2.45 for RWR versus the expected 2.49, essentially identical to shortest-path (2.57) and EWI (2.47) (Table S3). Across thresholds the RWR ratio spans 2.45--3.04, so we present the scaling as a formal, metric-independent result rather than as a variance-invariant alternative.
+Thus perturbation efficiency is the mean per-target influence on the disease module. We also verified the identity numerically: joint versus mean single-target influence is 0.11380975 versus 0.11380968 for Hyperforin, within RWR convergence tolerance. The earlier inconsistent secondary definition using `I/|T|` has been removed.
 
-### 1.7 Restart-probability (α) sensitivity.
-Added. Across α ∈ {0.10, 0.15, 0.20, 0.30, 0.50, 0.70} (STRING ≥900), the Hyperforin > Quercetin per-target ranking holds at every value; the magnitude is α-dependent:
+### 1.5 Generalization and benchmarking on DILIrank 2.0.
 
-| α | 0.10 | 0.15 | 0.20 | 0.30 | 0.50 | 0.70 |
+We agree that broader benchmarking is important, and we have revised the scope accordingly. The present repository contains curated target sets for the two stress-test compounds only. DILIrank 2.0 is a drug-level labeling resource rather than a harmonized drug-target-network benchmark; using it to test perturbation efficiency for drug-level DILI classification would require consistent target curation for many drugs and would need to account for dose, exposure, pharmacokinetics, reactivity, and binding directionality. We therefore no longer claim population-level predictive performance. Instead, we identify a properly powered DILIrank benchmark with curated targets as future work and keep the present contribution focused on statistical interpretation under target-count asymmetry.
+
+To reduce reliance on the two-compound example, we added the operating-regime benchmark described above. This benchmark characterizes the statistic over degree-controlled random probes and shows that material effect/evidence reversal is conditional and relatively rare for generic probes.
+
+### 1.6 Quantify variance shrinkage for RWR.
+
+Addressed. We no longer claim that RWR or expression-weighted influence avoids target-count variance shrinkage. At STRING >=900, the null-SD ratio is 2.57 for shortest-path proximity, 2.45 for RWR, and 2.47 for EWI, close to the expected \(\sqrt{62/10}=2.49\). Across the two network thresholds, the RWR ratio spans 2.45 to 3.04. We now present this as a metric-independent consequence of averaging over target sets.
+
+### 1.7 Restart-probability sensitivity.
+
+Addressed. We added a restart-probability sweep for \(\alpha \in \{0.10, 0.15, 0.20, 0.30, 0.50, 0.70\}\) at STRING >=900. The Hyperforin > Quercetin per-target influence ranking holds throughout, while the fold ratio is alpha-dependent:
+
+| alpha | 0.10 | 0.15 | 0.20 | 0.30 | 0.50 | 0.70 |
 |---|---|---|---|---|---|---|
-| `E` ratio (Hyp/Quer) | 2.90 | 3.54 | 4.18 | 5.53 | 8.81 | 13.35 |
+| `E` ratio (Hyperforin/Quercetin) | 2.90 | 3.54 | 4.18 | 5.53 | 8.81 | 13.35 |
 
-We now report the **ranking** as the robust claim and present the ratio as α-dependent. We also corrected a citation error: α=0.15 was attributed to Guney et al. (2016), but Guney's proximity is shortest-path-based and contains no random walk or restart parameter; we now cite Köhler et al. (2008) for RWR and justify α=0.15 (PageRank-style damping), with the full sweep in the Supplement.
+We therefore report the ordering as the robust result and avoid treating the alpha-dependent ratio as a fixed biological constant. We also corrected the RWR citation: Guney et al. use shortest-path proximity and do not define a restart parameter; the revised manuscript cites Kohler et al. (2008) for RWR.
 
-### 1.8 Expression-floor sensitivity (the 0.01 threshold).
-Added. Across floor ∈ {0, 10⁻³, 10⁻², 5·10⁻², 10⁻¹}, the EWI ratio is 2.69–2.70 throughout — the floor changes results only in the third decimal. EWI is retained as a tissue-weighted sensitivity analysis, and we state that the floor is immaterial.
+### 1.8 Expression-floor sensitivity.
+
+Addressed. We added an expression-floor sweep over \(0, 10^{-3}, 10^{-2}, 5 \times 10^{-2}, 10^{-1}\). The EWI ratio remains 2.69 to 2.70 across this range, indicating that the 0.01 floor does not materially affect the result.
 
 ### 1.9 AI-style figure summaries.
-Removed. The bracketed interpretive overlays embedded in figure code/captions and promotional strings are deleted; figures now carry only standard titles, axes, legends, and journal-style captions. We retain a sober AI-use disclosure: "AI-assisted tools were used for code drafting and language editing; all analyses, results, and interpretations were verified by the author."
+
+Addressed. The figure overlays and AI-style explanatory summaries were removed. The figures now contain standard titles, axes, legends, and journal-style captions. The manuscript retains a concise AI-use disclosure in the Methods: "AI-assisted tools were used for code drafting and language editing. All analyses, results, and interpretations were verified by the authors. Computational execution and primary numerical verification were performed by A.B."
 
 ---
 
-## New analysis added in revision: separating direct overlap from propagated influence (new §2.4, Table 3, Figure 6)
+## Reviewer 2
 
-A reviewer could reasonably argue that Hyperforin's signal is circular, because its curated targets include xenobiotic-metabolism genes that are themselves DILI-module members. We audited this directly rather than asserting otherwise, and built the result into the paper as Results §2.4 ("Separating direct overlap from propagated influence"), Table 3, and Figure 6 (`R/fig7_leakage.R`). **4 of 10 Hyperforin targets are DILI genes (ABCB1, CYP2C9, MMP2, NR1I2); only 1 of 62 Quercetin targets is (MMP2).** We decompose the per-target influence into a **direct-overlap component** (steady-state mass on target∩DILI nodes — which the canonical proximity framework, Guney et al. 2016, explicitly retains as a real distance-0 signal) and a **propagated component** isolated by the standard leave-one-out convention in network propagation (Köhler 2008; Cowen 2017). Decomposing the per-target advantage (STRING ≥900):
+### 2.1 Dependence of proximity Z-scores on target-set size is expected precision, not bias.
 
-| Quantity | E(Hyp) | E(Quer) | ratio |
+We agree. This is now the central framing of the revision. We removed language describing target-count-dependent null-variance shrinkage as a defect, artifact, or bias. The revised manuscript states that a proximity Z-score is an evidence statistic,
+
+> `Z = (M_obs - mu_null) / sigma_null`,
+
+and that larger target sets can legitimately yield sharper evidence because the null standard deviation of an averaged statistic shrinks with target count. We now explicitly distinguish Quercetin's stronger standardized evidence from Hyperforin's stronger raw topological proximity.
+
+We formalize this point with a null-SD scaling audit. For random seed sets, the RWR null standard deviation scales as approximately \(|T|^{-0.477}\), close to the theoretical \(-1/2\) expectation:
+
+| \|T\| | 5 | 10 | 20 | 40 | 62 |
+|---|---|---|---|---|---|
+| null SD | 0.00931 | 0.00677 | 0.00594 | 0.00350 | 0.00278 |
+
+Across metrics, the Hyperforin/Quercetin null-SD ratio remains close to the expected \(\sqrt{62/10}=2.49\): shortest-path 2.57, RWR 2.45, and EWI 2.47 at STRING >=900.
+
+### 2.2 RWR and EWI also show approximately 2.5-fold SD shrinkage.
+
+Agreed and addressed. We deleted the earlier reduced-shrinkage claim for influence propagation. RWR is now presented as a different effect-size scale, not as a method that avoids the law-of-large-numbers shrinkage. RWR and EWI Z-scores remain evidence statistics and are subject to the same target-count scaling.
+
+### 2.3 Perturbation-efficiency Z-scores do not replace traditional proximity Z-scores.
+
+Agreed. We no longer present RWR or EWI Z-scores as replacements for proximity Z-scores. The revised manuscript separates four quantities:
+
+| Quantity | Question addressed | Role |
+|---|---|---|
+| `d_c` (shortest-path) | How close are targets to the disease module? | Raw topological effect size |
+| Proximity Z | Is that proximity surprising under a matched null? | Evidence |
+| RWR per-target influence `E` | How much random-walk mass reaches the disease module per target? | Propagated effect size |
+| RWR/EWI Z | Is that influence surprising under a matched null? | Evidence |
+
+Perturbation efficiency is therefore an effect-size complement to the Z-score, not a replacement for it.
+
+### 2.4 Claims not supported by experiments / publication premature.
+
+We have substantially narrowed and re-supported the claims. First, the revised manuscript no longer claims that proximity is biased, that RWR resolves a bias, or that perturbation efficiency predicts DILI. Second, we revalidated the closest-distance proximity results against Guney-style degree binning and the two-sided null. The observed closest distances are reproduced, and the two-sided null attenuates the evidence gap to near parity (Hyperforin \(Z=-3.55\), Quercetin \(Z=-3.66\)), while the fixed-disease null remains the primary comparison for two compounds against the same disease module. Third, we added the direct-overlap analysis below, which reduces the biological overstatement of the original version.
+
+The revised contribution is therefore a controlled methodological audit of effect-size/evidence interpretation under target-count asymmetry, not a proposed toxicity predictor or a replacement significance statistic.
+
+---
+
+## Additional Analysis Added in Revision: Direct Overlap Versus Propagated Influence
+
+We added a new Results subsection, table, and figure to separate direct target-DILI overlap from propagated influence. Four of ten Hyperforin targets are DILI-module genes (ABCB1, CYP2C9, MMP2, NR1I2), whereas one of 62 Quercetin targets is a DILI-module gene (MMP2). The revised manuscript decomposes the per-target influence as follows at STRING >=900:
+
+| Quantity | E(Hyperforin) | E(Quercetin) | Ratio |
 |---|---|---|---|
-| Raw per-target influence | 0.1138 | 0.0322 | 3.5× |
-| **Direct-overlap** component | 0.0711 | 0.0032 | 22.5× |
-| **Propagated** component (leave-one-out) | 0.0427 | 0.0290 | **1.5×** |
+| Raw per-target influence | 0.1138 | 0.0322 | 3.5x |
+| Direct-overlap component | 0.0711 | 0.0032 | 22.5x |
+| Propagated component (leave-one-out) | 0.0427 | 0.0290 | 1.5x |
 
-So **62% of Hyperforin's per-target influence is direct overlap** (vs only 10% for Quercetin); the genuinely propagated advantage is a modest **1.5×** (1.2–1.9× across alternative exclusions of the propagated term), not the raw 3.5×. Against a **global degree-matched random 10-gene background** (n=1,000), the propagated component sits at the 99.9th percentile (3.3× the background mean; empirical p=0.002) but does **not** exceed all random sets, and some size-matched Quercetin subsets reach comparable values. We therefore drop the earlier uniqueness claim and report a **modest propagated advantage layered on a larger, mechanistically coherent direct-overlap effect** — both concentrated in the PXR–CYP–transporter axis, which is simultaneously the known DILI-relevant mechanism and the locus of the overlap. This is a more credible result than the original.
+Thus, 62% of Hyperforin's per-target influence is direct overlap. The propagated residual is more modest: approximately 1.5-fold, and 1.2- to 1.9-fold across alternative exclusions. Against a global degree-matched random 10-gene background, the propagated component is at the 99.9th percentile (3.3-fold above the background mean; empirical \(p=0.002\)), but it does not exceed all random sets and overlaps the upper tail of size-matched Quercetin subsets.
 
-Two orthogonal measures corroborate the same picture and are added to the Supplement: the **Menche et al. (2015) network separation measure S_AB** (Table S10) shows both target sets are topologically separated from the DILI module (Hyperforin slightly more so), and a **direct-connectivity count** (Table S11) shows Hyperforin's targets carry more distance-1 DILI links per target (3.4 vs 1.5) — i.e. the advantage is concentrated in a few directly DILI-linked targets, exactly as the direct/propagated split implies.
+We also added two corroborating checks in the Supplement. Menche et al.'s network separation measure \(S_{AB}\) shows that both target sets are topologically separated from the DILI module. A direct-connectivity count shows that Hyperforin targets carry more distance-1 DILI links per target (3.4 versus 1.5), consistent with the direct/propagated decomposition.
 
-We also add a **DILI-module sensitivity analysis** (Table S12, `scripts/run_dili_module_sensitivity.py`) that directly stress-tests the circularity at the level of the disease module rather than the targets. Every other robustness check varies the *method*; this one removes from the 82-gene module the four genes that are simultaneously Hyperforin targets and DILI members (ABCB1, CYP2C9, MMP2, NR1I2), giving a reduced module the targets cannot directly overlap, and recomputes the propagated advantage symmetrically. It does **not** collapse — it edges up from 1.47× to 1.58× — because Hyperforin's leave-one-out value is unchanged while Quercetin loses propagation onto those pharmacogenes, which it had benefited from as non-targets; against a degree-matched background on the reduced module Hyperforin remains ~99th percentile (p=0.005) but still not unique. So the modest propagated signal is not an artifact of the module being defined to include the drug's own pharmacogenes. The earlier size-matched bootstrap is retained as Supplementary Figure S1, explicitly labelled as a baseline control superseded by the overlap-adjusted decomposition.
+Finally, we added a DILI-module sensitivity analysis in which the four genes that are both Hyperforin targets and DILI-module members are removed from the disease module. The propagated advantage does not collapse; it changes from 1.47-fold to 1.58-fold. This supports the interpretation that the propagated residual is not solely an artifact of direct target-module overlap, while also making clear that the raw 3.5-fold value should not be interpreted without the decomposition.
 
 ---
 
-## Limitations we explicitly do not claim
+## Explicit Limitations Added or Strengthened
 
-To avoid over-reading the controlled two-compound design, the revised manuscript explicitly does **not** claim any of the following, and states so:
-- **No full DILIrank predictive benchmark.** Perturbation efficiency is not validated as a drug-level DILI-risk model; a properly powered DILIrank benchmark with curated target sets is identified as future work.
-- **No causal toxicity prediction.** Network influence is topological reach, not a toxicological outcome; dose, exposure, pharmacokinetics, binding directionality, and reactivity are not modelled.
-- **No purely physical-PPI claim.** The STRING network is a functional association network (multiple evidence channels), not a physical binding network.
-- **No causal DILI gene set.** The DILI module is a curated association set (DisGeNET), not a validated causal driver set.
-- **No population-level performance claim.** The Hyperforin/Quercetin pair is a deliberate stress test, not a representative sample, and no generalisation is claimed from it.
-- **No claim of Hyperforin intrinsic hepatotoxicity.** Hyperforin is a PXR/CYP-inducing mechanistic positive control that exacerbates DILI-relevant bioactivation; it is not presented as an established intrinsic hepatotoxin.
+To avoid overinterpretation of the controlled two-compound design, the revised manuscript explicitly states that:
 
-Stating these boundaries explicitly is intended to make the scope of the controlled audit unambiguous.
+- Perturbation efficiency is not validated as a drug-level DILI-risk predictor.
+- No full DILIrank predictive benchmark is claimed.
+- Network influence is topological reach, not a toxicological outcome.
+- Dose, exposure, pharmacokinetics, binding directionality, and reactivity are not modeled.
+- STRING is used as a functional association network, not a purely physical PPI network.
+- The DILI module is a curated association set, not a validated causal gene set.
+- Hyperforin/Quercetin are a diagnostic stress-test pair, not a representative compound sample.
+- Hyperforin is not presented as an established intrinsic hepatotoxin.
 
-## Summary of changes
-- New title and reframed abstract/introduction (effect size vs evidence; Guney/Menche/ASA framing).
-- Deleted: prior defect-language, variance-escape claims, uniqueness claims, and target-count-correction framing.
-- Added: null-SD scaling result; corrected perturbation-efficiency equation (RWR linearity); α and expression-floor sensitivity; **new §2.4 separating direct overlap from propagated influence (Table 3, Figure 6), with S_AB (Table S10) and direct-connectivity (Table S11) corroboration**; Guney-toolbox fidelity revalidation (Supplement); **a Code Availability section with GitHub + Zenodo DOI deposition (editor request)**.
-- Corrected: α citation (Köhler 2008, not Guney); Hyperforin target node degrees (Table S2) recomputed on the ≥900 analysis LCC rather than the larger source network; shortest-path p-values reported as Z (per Guney) or honest `(r+1)/(n+1)` empirical values; broken equation references; removal of AI-style figure text.
-- **Presentation (per editor / journal tier):** professional LaTeX rebuild — `siunitx` decimal-aligned tables, `booktabs`, `microtype`, running header, one-half spacing, line numbers for review, consistent caption styling; figures regenerated with no AI-style overlay text and rendered in citation order.
+---
 
-We believe the revised manuscript is substantially more rigorous and defensible, and we are grateful to both reviewers for pushing it there.
+## Summary of Changes
 
-### References newly cited
-- Wasserstein & Lazar (2016), *The ASA Statement on p-Values*, *Am. Statistician* 70:129–133.
-- Menche et al. (2015), *Uncovering disease–disease relationships through the incomplete interactome*, *Science* 347:1257601.
-- Köhler et al. (2008), *Walking the interactome for prioritization of candidate disease genes*, *Am. J. Hum. Genet.* 82:949–958.
-- Cowen et al. (2017), *Network propagation: a universal amplifier of genetic associations*, *Nat. Rev. Genet.* 18:551–562.
+- Revised title, abstract, and Introduction to focus on effect size versus evidence.
+- Removed defect/bias-correction language, variance-escape claims, uniqueness claims, and DILI-prediction framing.
+- Added null-SD scaling analysis, corrected perturbation-efficiency equation, alpha sensitivity, expression-floor sensitivity, direct-overlap decomposition, DILI-module sensitivity, Guney-fidelity revalidation, and the operating-regime benchmark.
+- Added Code Availability and DOI-archiving language in response to the editor's requirement.
+- Removed AI-style figure summaries and regenerated figures with standard scientific captions.
+
+We thank the editor and reviewers again for comments that substantially strengthened both the statistical framing and the empirical support for the revised manuscript.
+
+### References Newly Cited
+
+- Wasserstein and Lazar (2016), *The ASA Statement on p-Values*, *The American Statistician* 70:129-133.
+- Menche et al. (2015), *Uncovering disease-disease relationships through the incomplete interactome*, *Science* 347:1257601.
+- Kohler et al. (2008), *Walking the interactome for prioritization of candidate disease genes*, *American Journal of Human Genetics* 82:949-958.
+- Cowen et al. (2017), *Network propagation: a universal amplifier of genetic associations*, *Nature Reviews Genetics* 18:551-562.
 - Erten et al. (2011), *DADA: Degree-Aware Algorithms for Network-Based Disease Gene Prioritization*, *BioData Mining* 4:19.
 - Olubamiwa et al. (2025), *DILIrank 2.0*, *Drug Discovery Today*.

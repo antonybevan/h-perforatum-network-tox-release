@@ -118,7 +118,7 @@ If you use this pipeline or data, please cite (update with the published DOI on 
 @article{bevan_effectsize_evidence,
   title   = {Separating effect size from statistical evidence in network-proximity
              rankings under target-count asymmetry: a controlled liver-interactome audit},
-  author  = {Bevan, Antony},
+  author  = {Bevan, Antony and M, Sarputheen and Mahalingam, Vijayakumar Thangavel},
   journal = {(under review, Scientific Reports)},
   year    = {2026},
   note    = {Code: https://github.com/antonybevan/h-perforatum-network-tox-release}

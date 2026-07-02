@@ -5,6 +5,16 @@ type: software
 authors:
   - family-names: "Bevan"
     given-names: "Antony"
+    orcid: "https://orcid.org/0009-0002-3676-2042"
+  - family-names: "M"
+    given-names: "Sarputheen"
+    email: "sarputheen159@gmail.com"
+    affiliation: "Department of Pharmacy Practice, SRM College of Pharmacy, Faculty of Medicine and Health Science, SRM Institute of Science and Technology, Kattankulathur, Chennai, India"
+  - family-names: "Mahalingam"
+    given-names: "Vijayakumar Thangavel"
+    orcid: "https://orcid.org/0000-0002-7749-3224"
+    email: "vijayakm2@srmist.edu.in"
+    affiliation: "Department of Pharmacy Practice, SRM College of Pharmacy, Faculty of Medicine and Health Science, SRM Institute of Science and Technology, Kattankulathur, Chennai, India"
 repository-code: "https://github.com/antonybevan/h-perforatum-network-tox-release"
 url: "https://github.com/antonybevan/h-perforatum-network-tox-release"
 abstract: >-
