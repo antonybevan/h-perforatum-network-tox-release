@@ -65,7 +65,7 @@ I(T,D) = \sum_{d \in D} p_d. \label{eq:infl}
 \end{equation}
 Taking the restart vector uniform over the target set, $p_0(i) = 1/|T|$ for $i \in T$ and $0$ otherwise, Eq.~\eqref{eq:rwr} is linear in $\mathbf{p}_0$, so
 \begin{equation}
-E(T,D) \equiv I(T,D) = \frac{1}{|T|}\sum_{t \in T}\sum_{d \in D} p_d^{(t)}, \label{eq:pe}
+E(T,D) \equiv I(T,D) = \frac{1}{|T|}\sum_{t \in T}\sum_{d \in D} p_d^{(t)}. \label{eq:pe}
 \end{equation}
 Perturbation efficiency $E$ is therefore exactly the mean per-target influence on the disease module --- a size-normalized effect-size measure, not a re-standardized evidence statistic. Here $\mathbf{p}^{(t)}$ denotes the RWR steady-state vector seeded from target $t$ alone. We verified Eq.~\eqref{eq:pe} numerically (joint vs mean-of-single-target influence agree to RWR tolerance: $0.11380975$ vs $0.11380968$ for Hyperforin).
 
