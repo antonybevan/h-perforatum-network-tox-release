@@ -14,6 +14,29 @@ The revision makes five substantive changes:
 
 All new results are reproducible from the committed repository scripts, including `REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, and `GUNEY_FIDELITY_check.py`.
 
+### Note on regenerated figures and numerical outputs
+
+Because the revision changes the central framing from a bias-correction claim to an effect-size/evidence interpretation audit, all figures, tables, and headline numerical summaries were regenerated from the committed analysis pipeline. The revised manuscript therefore reports a single internally consistent analysis set. Values that differ from the original submission reflect corrected definitions, added controls, or replacement of earlier headline summaries by more conservative decomposed quantities; they are not manual edits.
+
+The most important changes are:
+- Proximity Z-scores are no longer described as biased; they are reported as standardized evidence.
+- Perturbation efficiency is no longer presented as replacing proximity Z-scores; it is reported as a complementary effect-size measure.
+- The original raw per-target influence ratio is now decomposed into direct target–DILI overlap and propagated influence.
+- Figure and table numbering changed because new analyses were added and figures were regenerated.
+- All reported values are reproducible from the committed scripts and checksum-verified processed data.
+
+### Summary of major numerical revisions
+
+| Original emphasis | Revised presentation | Reason |
+|---|---|---|
+| Proximity Z-score treated as target-count bias | Proximity Z-score treated as standardized evidence whose magnitude can diverge from raw effect size | Reviewer 2 correctly identified this as statistical precision, not metric failure |
+| RWR/PE presented as resolving the bias | PE presented as mean per-target influence, an effect-size complement to Z-score | Avoids claiming replacement of valid evidence statistics |
+| Raw PE ratio emphasized as ~3.5× | Direct/propagated decomposition added: 62% direct overlap; propagated residual ~1.5× | Prevents overinterpreting direct target–DILI overlap as propagated network positioning |
+| Bootstrap claimed no Quercetin subset matched Hyperforin | Bootstrap retained only as baseline; decomposition supersedes it | Bootstrap did not adjust for target–DILI overlap |
+| Figure set used explanatory overlay text | Figures regenerated with standard scientific captions and updated analyses | Reviewer 1 requested removal of AI-style figure summaries |
+| No operating-regime benchmark | Added 20,000 probes per size and 500,000 cross-size pairs | Reduces dependence on two-compound example |
+| No Guney-fidelity check | Added fixed-disease and two-sided Guney-style null validation | Addresses implementation and null-model concerns |
+
 ---
 
 ## Editor
