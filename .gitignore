@@ -119,3 +119,8 @@ TODO_*.md
 scratch*.md
 local*.md
 PRIVATE_*.md
+scratch_anon/
+scratch_id/
+tmp/
+*.fdb_latexmk
+*.fls
