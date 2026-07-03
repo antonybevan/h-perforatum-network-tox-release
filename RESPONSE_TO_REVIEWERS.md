@@ -156,9 +156,26 @@ To avoid overinterpretation of the controlled two-compound design, the revised m
 
 - Revised title, abstract, and Introduction to focus on effect size versus evidence.
 - Removed defect/bias-correction language, variance-escape claims, uniqueness claims, and DILI-prediction framing.
-- Added null-SD scaling analysis, corrected perturbation-efficiency equation, alpha sensitivity, expression-floor sensitivity, direct-overlap decomposition, DILI-module sensitivity, Guney-fidelity revalidation, and the operating-regime benchmark.
 - Added Code Availability and DOI-archiving language in response to the editor's requirement.
 - Removed AI-style figure summaries and regenerated figures with standard scientific captions.
+
+### Additional analyses carried out
+
+- Direct versus propagated influence decomposition (§2.5, Table 3, Figure 6)
+- Restart-probability sensitivity (§2.6, Table S-alpha)
+- Expression-floor sensitivity (§2.6, Table S-floor)
+- Null-SD scaling audit (§2.1, Table 2, Table S-null)
+- Guney-fidelity revalidation (§2.7, Table S-Guney)
+- Fixed-disease versus two-sided null comparison (Table S-Guney)
+- Operating-regime benchmark (§2.8, Table S-opregime, Figure S1)
+- Text-mining robustness (Table S-textmining)
+- DILI-module sensitivity (Table S-modulesens)
+
+### Analysis not carried out and rationale
+
+Full DILIrank predictive benchmarking was not performed. As discussed in the response to Reviewer 1.5, this would require harmonised curated target sets for many drugs, together with dose, exposure, pharmacokinetics, binding directionality, and reactivity modelling. The present paper is a controlled statistical-interpretation audit under target-count asymmetry, not a DILI-risk predictor. We identify a properly powered DILIrank benchmark with curated targets as future work.
+
+---
 
 We thank the editor and reviewers again for comments that substantially strengthened both the statistical framing and the empirical support for the revised manuscript.
 
