@@ -21,14 +21,14 @@
 
 \textbf{Null estimands.} Two degree-matched permutation nulls are reported. The \textit{fixed-disease null} randomises only the target set and holds the disease module at the 82 real DILI genes; it evaluates whether the observed target set is unusually close to the fixed DILI module and is the appropriate primary null for comparing two compounds against the same disease. The \textit{two-sided null} (after \citet{Guney2016}) additionally randomises a degree-matched disease set; it answers the population-level drug--disease question and is reported as a fidelity sensitivity (Table~\ref{tab:s_guney}).
 
-\textbf{p-value convention.} All permutation p-values are empirical, directional, and computed as $(r+1)/(n+1)$ \citep{Phipson2010}: one-sided for \textit{smaller-than-null distance} (proximity) and \textit{larger-than-null influence} (RWR/EWI). With $n=1{,}000$ the floor is $9.99\times10^{-4}$. Z-scores are the primary magnitude report; no two-tailed permutation p-value is used.
+\textbf{p-value convention.} All permutation p-values are empirical, directional, and computed as $(r+1)/(n+1)$ \citep{Phipson2010}: one-sided for \textit{smaller-than-null distance} (proximity) and \textit{larger-than-null influence} (RWR/EWI). With $n=1{,}000$ the floor is $9.99\times10^{-4}$. Z-scores are the primary standardized-evidence statistic; no two-tailed permutation p-value is used.
 
 \section*{Supplementary Figures}
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.7\textwidth]{figures/fig5_bootstrap.pdf}
-\caption{\textbf{Bootstrap sensitivity (baseline).} Distribution of RWR influence for random 10-target subsets of Quercetin; solid line, Hyperforin observed influence. This baseline control does not adjust for target--DILI overlap; the leakage-controlled analysis (Table~\ref{tab:leakage}, Fig.~\ref{fig:leakage}) supersedes the headline ratio. STRING $\geq$900.}
+\caption{\textbf{Bootstrap sensitivity (baseline).} Distribution of RWR influence for random 10-target subsets of Quercetin; solid line, Hyperforin observed influence. This baseline control does not adjust for target--DILI overlap; the leakage-controlled analysis (Table~\ref{tab:leakage}, Fig.~\ref{fig:leakage}) supersedes the raw baseline ratio. STRING $\geq$900.}
 \label{fig:bootstrap}
 \end{figure}
 
@@ -94,7 +94,7 @@ MMP9   & MMP-9       & 1   & 25  & indirect \\
 % S-null: permutation null parameters by metric (Reviewer-2-referenced table)
 \begin{table}[ht]
 \centering
-\caption{\textbf{Permutation null parameters across metrics} (STRING $\geq$900; $n=1{,}000$ degree-matched permutations). The null standard deviation $\sigma_{\text{null}}$ of the 62-target compound is $\approx$2.5$\times$ smaller than that of the 10-target compound for shortest-path, random-walk \emph{and} expression-weighted influence alike --- the Law-of-Large-Numbers shrinkage ($\sqrt{62/10}=2.49$), identical across metrics. This is why Z-score magnitude is not comparable across compounds of very different target count.}
+\caption{\textbf{Permutation null parameters across metrics} (STRING $\geq$900; $n=1{,}000$ degree-matched permutations). The null standard deviation $\sigma_{\text{null}}$ of the 62-target compound is approximately 2.5$\times$ smaller than that of the 10-target compound for shortest-path proximity, random-walk influence, and expression-weighted influence, consistent with Law-of-Large-Numbers shrinkage ($\sqrt{62/10}=2.49$) across metrics. This is why Z-score magnitude is not comparable across compounds of very different target count.}
 \label{tab:s_nullsd}
 \begin{tabular}{@{}ll S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] S[table-format=+2.2]@{}}
 \toprule
@@ -137,7 +137,7 @@ $R=|T_L|/|T_S|$ & $(|T_S|,|T_L|)$ & {reversal, $\delta_0\geq0.3$ (\%)} & {revers
 % S-textmining: text-mining sensitivity values (before/after removing TM-only edges)
 \begin{table}[ht]
 \centering
-\caption{\textbf{Text-mining robustness: metric values before and after removing text-mining-only STRING edges} (liver-expressed LCC; following \citet{Huang2018}, every edge supported \textit{solely} by the STRING text-mining channel was removed). ``Committed'' is the value in the main analysis; ``no-TM'' is after removal. The Hyperforin\,$>$\,Quercetin ordering (smaller $d_c$; larger influence) is preserved on all three metrics at both network thresholds, and every no-TM permutation $p<0.002$; arguing against literature text-mining circularity as the driver. Source: \protect\path{results/tables/string_textmining_sensitivity.csv}.}
+\caption{\textbf{Text-mining robustness: metric values before and after removing text-mining-only STRING edges} (liver-expressed LCC; following \citet{Huang2018}, every edge supported \textit{solely} by the STRING text-mining channel was removed). ``Committed'' is the value in the main analysis; ``no-TM'' is after removal. The Hyperforin\,$>$\,Quercetin ordering (smaller $d_c$; larger influence) is preserved on all three metrics at both network thresholds, and every no-TM directional permutation test gives $p<0.002$, arguing against literature text-mining circularity as the driver. Source: \protect\path{results/tables/string_textmining_sensitivity.csv}.}
 \label{tab:s_textmining}
 \small
 \begin{tabular}{@{}ll S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] S[table-format=1.4] c@{}}
