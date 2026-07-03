@@ -124,3 +124,5 @@ scratch_id/
 tmp/
 *.fdb_latexmk
 *.fls
+*.aux
+*.out
