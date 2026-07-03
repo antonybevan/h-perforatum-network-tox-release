@@ -20,7 +20,7 @@ All new results are reproducible from the committed repository scripts, includin
 
 ### E.1 Code deposition in a DOI-issuing repository and Code Availability statement.
 
-Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot will be deposited in Zenodo before final resubmission, and the Zenodo DOI will be inserted into the final Code Availability section. The deposited materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
+Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot will be deposited in Zenodo before final resubmission, and the Zenodo DOI will be inserted into the final Code Availability section. The repository materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
 
 ---
 
@@ -84,7 +84,7 @@ We agree. This is now the central framing of the revision. We removed language d
 
 > `Z = (M_obs - mu_null) / sigma_null`,
 
-and that larger target sets can legitimately yield sharper evidence because the null standard deviation of an averaged statistic shrinks with target count. We now explicitly distinguish Quercetin's stronger standardized evidence from Hyperforin's stronger raw topological proximity.
+and that larger target sets can legitimately yield stronger standardized evidence because the null standard deviation of an averaged statistic shrinks with target count. We now explicitly distinguish Quercetin's stronger standardized evidence from Hyperforin's stronger raw topological proximity.
 
 We formalize this point with a null-SD scaling audit. For random seed sets, the null standard deviation scales as approximately \(|T|^{-0.48}\), close to the theoretical \(-1/2\) expectation; the degree-controlled operating-regime benchmark refines this exponent to \(-0.499\) (95% CI \([-0.502,-0.495]\)):
 
@@ -111,7 +111,7 @@ Agreed. We no longer present RWR or EWI Z-scores as replacements for proximity Z
 
 Perturbation efficiency is therefore an effect-size complement to the Z-score, not a replacement for it.
 
-### 2.4 Claims not supported by experiments / publication premature.
+### 2.4 Support for claims and scope of conclusions.
 
 We have substantially narrowed and re-supported the claims. First, the revised manuscript no longer claims that proximity is biased, that RWR resolves a bias, or that perturbation efficiency predicts DILI. Second, we revalidated the closest-distance proximity results against Guney-style degree binning and the two-sided null. The observed closest distances are reproduced, and the two-sided null attenuates the evidence gap to near parity (Hyperforin \(Z=-3.55\), Quercetin \(Z=-3.66\)), while the fixed-disease null remains the primary comparison for two compounds against the same disease module. Third, we added the direct-overlap analysis below, which reduces the biological overstatement of the original version.
 
@@ -162,11 +162,3 @@ To avoid overinterpretation of the controlled two-compound design, the revised m
 
 We thank the editor and reviewers again for comments that substantially strengthened both the statistical framing and the empirical support for the revised manuscript.
 
-### References Newly Cited
-
-- Wasserstein and Lazar (2016), *The ASA Statement on p-Values*, *The American Statistician* 70:129-133.
-- Menche et al. (2015), *Uncovering disease-disease relationships through the incomplete interactome*, *Science* 347:1257601.
-- Kohler et al. (2008), *Walking the interactome for prioritization of candidate disease genes*, *American Journal of Human Genetics* 82:949-958.
-- Cowen et al. (2017), *Network propagation: a universal amplifier of genetic associations*, *Nature Reviews Genetics* 18:551-562.
-- Erten et al. (2011), *DADA: Degree-Aware Algorithms for Network-Based Disease Gene Prioritization*, *BioData Mining* 4:19.
-- Olubamiwa et al. (2025), *DILIrank 2.0*, *Drug Discovery Today*.
