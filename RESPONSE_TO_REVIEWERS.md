@@ -20,7 +20,7 @@ All new results are reproducible from the committed repository scripts, includin
 
 ### E.1 Code deposition in a DOI-issuing repository and Code Availability statement.
 
-Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot will be deposited in Zenodo before final resubmission, and the Zenodo DOI will be inserted into the final Code Availability section. The repository materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
+Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot has been deposited in Zenodo, and the Zenodo DOI has been inserted into the final Code Availability section. The repository materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
 
 ---
 
@@ -161,15 +161,15 @@ To avoid overinterpretation of the controlled two-compound design, the revised m
 
 ### Additional analyses carried out
 
-- Direct versus propagated influence decomposition (§2.5, Table 3, Figure 6)
-- Restart-probability sensitivity (§2.6, Table S-alpha)
-- Expression-floor sensitivity (§2.6, Table S-floor)
-- Null-SD scaling audit (§2.1, Table 2, Table S-null)
-- Guney-fidelity revalidation (§2.7, Table S-Guney)
-- Fixed-disease versus two-sided null comparison (Table S-Guney)
-- Operating-regime benchmark (§2.8, Table S-opregime, Figure S1)
-- Text-mining robustness (Table S-textmining)
-- DILI-module sensitivity (Table S-modulesens)
+- Direct versus propagated influence decomposition (Results §2.5; Table 3; Figure 6)
+- Restart-probability sensitivity (Perturbation efficiency section; Supplementary Table on restart-probability sensitivity)
+- Expression-floor sensitivity (Expression-weighting analysis; Supplementary Table on expression-floor sensitivity)
+- Null-SD scaling audit (Results §2.1; main null-SD table; Supplementary null-parameter table)
+- Guney-fidelity revalidation (canonical-proximity validation section; Guney-fidelity table)
+- Fixed-disease versus two-sided null comparison (Guney-fidelity validation)
+- Operating-regime benchmark (Results §2.2; operating-regime figure and Supplementary operating-regime table)
+- Text-mining robustness (Supplementary text-mining robustness note and table)
+- DILI-module sensitivity (Supplementary DILI-module sensitivity table)
 
 ### Analysis not carried out and rationale
 
