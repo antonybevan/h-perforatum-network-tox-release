@@ -80,6 +80,7 @@ manuscript/*.bbl
 # clone without a bibtex round-trip).
 !manuscript/main.bbl
 !manuscript/main_anonymous.bbl
+!manuscript/supplementary.bbl
 manuscript/*.blg
 manuscript/*.log
 manuscript/*.out
@@ -122,7 +123,10 @@ PRIVATE_*.md
 scratch_anon/
 scratch_id/
 tmp/
+.gemini_scratch/
 *.fdb_latexmk
 *.fls
 *.aux
 *.out
+*.blg
+*.log

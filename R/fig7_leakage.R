@@ -24,11 +24,19 @@ decl <- dec %>%
     value_label = ifelse(E < 0.006, "", sprintf("%.4f", E))
   )
 
+q_direct_label <- decl %>%
+  filter(compound == "Quercetin", component == "Direct overlap (targets in DILI)") %>%
+  mutate(y_label = sum(decl$E[decl$compound == "Quercetin"]) + 0.004)
+
 pA <- ggplot(decl, aes(x = compound, y = E, fill = component)) +
   geom_col(width = 0.62, color = "#2E3440", linewidth = 0.4) +
   geom_text(aes(label = value_label),
             position = position_stack(vjust = 0.5),
             size = 2.9, fontface = "bold", color = "white") +
+  geom_text(data = q_direct_label,
+            aes(label = sprintf("%.4f", E), y = y_label),
+            inherit.aes = FALSE, x = 2, size = 2.7, fontface = "bold",
+            color = "#2E3440") +
   scale_fill_manual(values = c("Direct overlap (targets in DILI)" = "#9AA7B5",
                                "Propagated (leave-one-out)"       = "#00468B"),
                     name = NULL) +

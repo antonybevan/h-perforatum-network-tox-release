@@ -12,27 +12,29 @@ The revision makes five substantive changes:
 4. **Guney-fidelity revalidation.** We revalidated the closest-distance proximity implementation against Guney-style degree binning and a two-sided null construction, confirming that the observed closest distances and the effect/evidence dissociation are not artifacts of the local implementation.
 5. **Operating-regime benchmark.** We added a degree-controlled liver-network calibration benchmark using 20,000 probes per target-set size and 500,000 cross-size probe pairs. This shows that the approximately \(|T|^{-1/2}\) null-precision law holds across the DILI module and size-matched pseudo-modules, and that material rank reversal is conditional rather than a generic outcome.
 
-All new results are reproducible from the committed repository scripts, including `REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, and `GUNEY_FIDELITY_check.py`.
+All new results are reproducible from the committed repository scripts and the archived Zenodo snapshot, including `REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, and `GUNEY_FIDELITY_check.py`.
 
 ### Note on regenerated figures and numerical outputs
 
 Because the revision changes the central framing from a bias-correction claim to an effect-size/evidence interpretation audit, all figures, tables, and headline numerical summaries were regenerated from the committed analysis pipeline. The revised manuscript therefore reports a single internally consistent analysis set. Values that differ from the original submission reflect corrected definitions, added controls, or replacement of earlier headline summaries by more conservative decomposed quantities; they are not manual edits.
 
 The most important changes are:
+
 - Proximity Z-scores are no longer described as biased; they are reported as standardized evidence.
 - Perturbation efficiency is no longer presented as replacing proximity Z-scores; it is reported as a complementary effect-size measure.
 - The original raw per-target influence ratio is now decomposed into direct target–DILI overlap and propagated influence.
+- The raw 3.5× per-target influence advantage is now interpreted through the decomposition: 62% direct overlap and an approximately 1.5× propagated residual.
 - Figure and table numbering changed because new analyses were added and figures were regenerated.
-- All reported values are reproducible from the committed scripts and checksum-verified processed data.
+- All reported values are reproducible from the committed scripts, checksum-verified processed data, and the archived Zenodo snapshot.
 
 ### Summary of major numerical revisions
 
 | Original emphasis | Revised presentation | Reason |
 |---|---|---|
-| Proximity Z-score treated as target-count bias | Proximity Z-score treated as standardized evidence whose magnitude can diverge from raw effect size | Reviewer 2 correctly identified this as statistical precision, not metric failure |
-| RWR/PE presented as resolving the bias | PE presented as mean per-target influence, an effect-size complement to Z-score | Avoids claiming replacement of valid evidence statistics |
+| Proximity Z-score framed as a metric problem | Proximity Z-score treated as standardized evidence whose magnitude can diverge from raw effect size | Reviewer 2 correctly identified this as statistical precision, not metric failure |
+| RWR/PE presented as correcting the metric problem | PE presented as mean per-target influence, an effect-size complement to Z-score | Avoids claiming replacement of valid evidence statistics |
 | Raw PE ratio emphasized as ~3.5× | Direct/propagated decomposition added: 62% direct overlap; propagated residual ~1.5× | Prevents overinterpreting direct target–DILI overlap as propagated network positioning |
-| Bootstrap claimed no Quercetin subset matched Hyperforin | Bootstrap retained only as baseline; decomposition supersedes it | Bootstrap did not adjust for target–DILI overlap |
+| Bootstrap overemphasized the Quercetin subset comparison | Bootstrap retained only as baseline; decomposition supersedes it | Bootstrap did not adjust for target–DILI overlap |
 | Figure set used explanatory overlay text | Figures regenerated with standard scientific captions and updated analyses | Reviewer 1 requested removal of AI-style figure summaries |
 | No operating-regime benchmark | Added 20,000 probes per size and 500,000 cross-size pairs | Reduces dependence on two-compound example |
 | No Guney-fidelity check | Added fixed-disease and two-sided Guney-style null validation | Addresses implementation and null-model concerns |
@@ -43,7 +45,7 @@ The most important changes are:
 
 ### E.1 Code deposition in a DOI-issuing repository and Code Availability statement.
 
-Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot has been deposited in Zenodo, and the Zenodo DOI has been inserted into the final Code Availability section. The repository materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
+Addressed in the revised manuscript. The tagged publication snapshot has been deposited in Zenodo, and the Zenodo DOI has been inserted into the final Code Availability section: <https://doi.org/10.5281/zenodo.21166752>. The archived materials include the analysis code, curated input data, committed result tables, figure-generation scripts, dependency records, checksum manifest, and reviewer-evidence verification scripts.
 
 ---
 
@@ -136,7 +138,7 @@ Perturbation efficiency is therefore an effect-size complement to the Z-score, n
 
 ### 2.4 Support for claims and scope of conclusions.
 
-We have substantially narrowed and re-supported the claims. First, the revised manuscript no longer claims that proximity is biased, that RWR resolves a bias, or that perturbation efficiency predicts DILI. Second, we revalidated the closest-distance proximity results against Guney-style degree binning and the two-sided null. The observed closest distances are reproduced, and the two-sided null attenuates the evidence gap to near parity (Hyperforin \(Z=-3.55\), Quercetin \(Z=-3.66\)), while the fixed-disease null remains the primary comparison for two compounds against the same disease module. Third, we added the direct-overlap analysis below, which reduces the biological overstatement of the original version.
+We have substantially narrowed and re-supported the claims. First, the revised manuscript no longer claims that proximity is defective, that RWR fixes it, or that perturbation efficiency predicts DILI. Second, we revalidated the closest-distance proximity results against Guney-style degree binning and the two-sided null. The observed closest distances are reproduced, and the two-sided null attenuates the evidence gap to near parity (Hyperforin \(Z=-3.55\), Quercetin \(Z=-3.66\)), while the fixed-disease null remains the primary comparison for two compounds against the same disease module. Third, we added the direct-overlap analysis below, which reduces the biological overstatement of the original version.
 
 The revised contribution is therefore a controlled methodological audit of effect-size/evidence interpretation under target-count asymmetry, not a proposed toxicity predictor or a replacement significance statistic.
 
@@ -178,8 +180,8 @@ To avoid overinterpretation of the controlled two-compound design, the revised m
 ## Summary of Changes
 
 - Revised title, abstract, and Introduction to focus on effect size versus evidence.
-- Removed defect/bias-correction language, variance-escape claims, uniqueness claims, and DILI-prediction framing.
-- Added Code Availability and DOI-archiving language in response to the editor's requirement.
+- Removed defect/correction language, variance-escape claims, uniqueness claims, and DILI-prediction framing.
+- Added Code Availability language and the Zenodo DOI in response to the editor's requirement.
 - Removed AI-style figure summaries and regenerated figures with standard scientific captions.
 
 ### Additional analyses carried out
@@ -201,4 +203,3 @@ Full DILIrank predictive benchmarking was not performed. As discussed in the res
 ---
 
 We thank the editor and reviewers again for comments that substantially strengthened both the statistical framing and the empirical support for the revised manuscript.
-

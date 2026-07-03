@@ -36,8 +36,8 @@ pA <- ggplot(mp, aes(n_targets, sigma_null)) +
            size = 2.9, hjust = 0, color = "#0072B2") +
   annotate("text", x = 5.3, y = min(mp$sigma_null) * 1.02, label = "dashed: |T|^-1/2",
            size = 2.6, hjust = 0, color = "#777777") +
-  labs(title = "A  Null-precision law", x = "Target-set size |T| (log)",
-       y = expression(sigma[null] ~ "(log)")) +
+  labs(title = "A  Null-precision law", x = "Target-set size |T| (log scale)",
+       y = expression("Null SD, " * sigma[null] * " (log scale)")) +
   theme_classic(base_size = 11, base_family = "Arial") +
   theme(plot.title = element_text(size = 12, face = "bold"),
         axis.line = element_line(linewidth = 0.5))
@@ -51,9 +51,10 @@ env <- mp %>% dplyr::filter(n_targets > base) %>%
 pB <- ggplot(env, aes(R, delta_max)) +
   geom_line(color = "#0072B2", linewidth = 0.6) +
   geom_point(size = 2, color = "#0072B2") +
-  annotate("point", x = R_real, y = real_margin, color = "#D55E00", size = 3) +
-  annotate("text", x = R_real, y = real_margin, label = "Hyperforin/Quercetin\nobserved margin (overturnable)",
-           hjust = 1.05, vjust = 1.3, size = 2.7, color = "#D55E00", lineheight = 0.9) +
+  annotate("point", x = R_real, y = real_margin, color = "#D55E00", size = 3.4) +
+  annotate("text", x = R_real, y = real_margin, label = "H/Q observed margin",
+           hjust = 1.05, vjust = 1.35, size = 3.1, fontface = "bold",
+           color = "#D55E00", lineheight = 0.9) +
   labs(title = "B  Overturn-capacity envelope",
        x = "Target-count ratio R = |T_large| / |T_small|",
        y = expression("Max overturnable raw margin " * delta[max] * " (hops)")) +
@@ -70,9 +71,9 @@ pC <- ggplot(pln, aes(margin, zgap)) +
   geom_point(aes(color = reversal), size = 0.5, alpha = 0.35) +
   scale_color_manual(values = c(`FALSE` = "#9AA7B5", `TRUE` = "#D55E00"), guide = "none") +
   scale_x_continuous(expand = expansion(mult = c(0.08, 0.12))) +
-  annotate("point", x = real_margin, y = real_zgap, color = "#D55E00", size = 3) +
+  annotate("point", x = real_margin, y = real_zgap, color = "#D55E00", size = 3.8) +
   annotate("text", x = real_margin, y = real_zgap, label = "Hyperforin/Quercetin",
-           hjust = 1.1, vjust = -0.6, size = 2.7, fontface = "bold", color = "#D55E00") +
+           hjust = 1.05, vjust = -0.65, size = 3.1, fontface = "bold", color = "#D55E00") +
   annotate("text", x = Inf, y = Inf, label = "reversal region\n(small closer,\nlarge stronger Z)",
            hjust = 1.05, vjust = 1.2, size = 2.5, color = "#B0560A", lineheight = 0.9) +
   labs(title = "C  Operating-regime plane (R = 6.2)",

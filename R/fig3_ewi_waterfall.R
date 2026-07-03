@@ -1,6 +1,6 @@
 # ============================================================================
 # fig3_ewi_waterfall.R - Main Figure 5: Expression-weighting sensitivity analysis
-# Decomposition of Z-score advantage under tissue-constrained influence propagation
+# Decomposition of the Hyperforin-minus-Quercetin Z-score gap under EWI.
 # ============================================================================
 
 source("R/00_setup_pub.R")
@@ -15,25 +15,26 @@ quer_ewi <- ewr_900 %>% filter(compound == "Quercetin") %>% pull(z_score)
 # --- Calculate Components ---
 rwr_gap <- hyp_rwr - quer_rwr  # Starting gap
 hyp_change <- hyp_ewi - hyp_rwr  # Hyperforin's change (negative = lost)
-quer_change <- quer_ewi - quer_rwr  # Quercetin's change (positive = gained from expresison)
+quer_change <- quer_ewi - quer_rwr  # Quercetin's change (positive = gained from expression)
+quer_gap_effect <- -quer_change  # A Quercetin gain reduces the Hyperforin-minus-Quercetin gap.
 ewi_gap <- hyp_ewi - quer_ewi  # Final gap
 
 # --- Waterfall Data (for geom_col approach) ---
 waterfall_data <- tibble(
   Step = factor(c(
-    "RWR\nadvantage",
-    "Hyperforin\nexpression effect",
-    "Quercetin\nexpression effect",
-    "EWI\nadvantage"
+    "RWR\nZ gap",
+    "Hyperforin loss\nnarrows gap",
+    "Quercetin gain\nnarrows gap",
+    "EWI\nZ gap"
   ), levels = c(
-    "RWR\nadvantage",
-    "Hyperforin\nexpression effect",
-    "Quercetin\nexpression effect",
-    "EWI\nadvantage"
+    "RWR\nZ gap",
+    "Hyperforin loss\nnarrows gap",
+    "Quercetin gain\nnarrows gap",
+    "EWI\nZ gap"
   )),
-  Value = c(rwr_gap, hyp_change, quer_change, ewi_gap),
+  Value = c(rwr_gap, hyp_change, quer_gap_effect, ewi_gap),
   Type = c("total", "change", "change", "total"),
-  ymin = c(0, rwr_gap + hyp_change, rwr_gap + hyp_change + quer_change, 0),
+  ymin = c(0, rwr_gap + hyp_change, rwr_gap + hyp_change + quer_gap_effect, 0),
   ymax = c(rwr_gap, rwr_gap, rwr_gap + hyp_change, ewi_gap)
 )
 
@@ -41,16 +42,16 @@ waterfall_data <- tibble(
 waterfall_data <- waterfall_data %>%
   mutate(
     ymin = case_when(
-      Step == "RWR\nadvantage" ~ 0,
-      Step == "Hyperforin\nexpression effect" ~ rwr_gap + hyp_change,
-      Step == "Quercetin\nexpression effect" ~ rwr_gap + hyp_change,
-      Step == "EWI\nadvantage" ~ 0
+      Step == "RWR\nZ gap" ~ 0,
+      Step == "Hyperforin loss\nnarrows gap" ~ rwr_gap + hyp_change,
+      Step == "Quercetin gain\nnarrows gap" ~ rwr_gap + hyp_change,
+      Step == "EWI\nZ gap" ~ 0
     ),
     ymax = case_when(
-      Step == "RWR\nadvantage" ~ rwr_gap,
-      Step == "Hyperforin\nexpression effect" ~ rwr_gap,
-      Step == "Quercetin\nexpression effect" ~ rwr_gap + hyp_change + quer_change,
-      Step == "EWI\nadvantage" ~ ewi_gap
+      Step == "RWR\nZ gap" ~ rwr_gap,
+      Step == "Hyperforin loss\nnarrows gap" ~ rwr_gap,
+      Step == "Quercetin gain\nnarrows gap" ~ rwr_gap + hyp_change + quer_gap_effect,
+      Step == "EWI\nZ gap" ~ ewi_gap
     ),
     Fill = case_when(
       Type == "total" ~ "Total",
@@ -99,9 +100,9 @@ p <- ggplot(waterfall_data, aes(x = Step)) +
   ) +
   
   labs(
-    title = "Expression-weighted influence: Z-score gap decomposition",
+    title = "Expression weighting attenuates but preserves\nthe influence Z-score gap",
     x = NULL,
-    y = "Z-score gap contribution"
+    y = "Hyperforin - Quercetin Z-score gap"
   ) +
   
   theme_classic(base_size = 11, base_family = "Arial") +

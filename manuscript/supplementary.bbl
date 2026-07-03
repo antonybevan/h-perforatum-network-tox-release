@@ -1,0 +1,32 @@
+\begin{thebibliography}{4}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Huang et~al.(2018)Huang, Carlin, Yu, Zhang, Kreisberg, Tamayo, and Ideker]{Huang2018}
+Justin~K Huang, Daniel~E Carlin, Michael~Ku Yu, Wei Zhang, Jason~F Kreisberg, Pablo Tamayo, and Trey Ideker.
+\newblock A systematic evaluation of molecular networks for discovery of disease genes.
+\newblock \emph{Cell Systems}, 6\penalty0 (4):\penalty0 484--495, 2018.
+\newblock \doi{10.1016/j.cels.2018.03.001}.
+
+\bibitem[Guney et~al.(2016)Guney, Menche, Vidal, and Bara{\'b}asi]{Guney2016}
+Emre Guney, J{\"o}rg Menche, Marc Vidal, and Albert-L{\'a}szl{\'o} Bara{\'b}asi.
+\newblock Network-based in silico drug efficacy screening.
+\newblock \emph{Nature Communications}, 7:\penalty0 10331, 2016.
+\newblock \doi{10.1038/ncomms10331}.
+
+\bibitem[Phipson and Smyth(2010)]{Phipson2010}
+Belinda Phipson and Gordon~K Smyth.
+\newblock Permutation {P-values} should never be zero: calculating exact {P-values} when permutations are randomly drawn.
+\newblock \emph{Statistical Applications in Genetics and Molecular Biology}, 9\penalty0 (1):\penalty0 Article 39, 2010.
+\newblock \doi{10.2202/1544-6115.1585}.
+
+\bibitem[Menche et~al.(2015)Menche, Sharma, Kitsak, Ghiassian, Vidal, Loscalzo, and Bara{\'b}asi]{Menche2015}
+J{\"o}rg Menche, Amitabh Sharma, Maksim Kitsak, Susan~Dina Ghiassian, Marc Vidal, Joseph Loscalzo, and Albert-L{\'a}szl{\'o} Bara{\'b}asi.
+\newblock Uncovering disease-disease relationships through the incomplete interactome.
+\newblock \emph{Science}, 347\penalty0 (6224):\penalty0 1257601, 2015.
+\newblock \doi{10.1126/science.1257601}.
+
+\end{thebibliography}
