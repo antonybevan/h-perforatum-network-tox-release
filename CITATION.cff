@@ -49,6 +49,11 @@ license:
   - CC-BY-4.0
 version: "2.1.1"
 date-released: "2026-07-03"
+doi: "10.5281/zenodo.21166752"
+identifiers:
+  - type: doi
+    value: "10.5281/zenodo.21166752"
+    description: "Concept DOI (all versions) of the archived Zenodo snapshot"
 references:
   - type: article
     title: "Uncovering disease-disease relationships through the incomplete interactome"

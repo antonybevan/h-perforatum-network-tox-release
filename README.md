@@ -4,6 +4,7 @@
 [![Code License: MIT](https://img.shields.io/badge/code%20license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Docs License: CC BY 4.0](https://img.shields.io/badge/docs%20%26%20data-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
 [![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21166752.svg)](https://doi.org/10.5281/zenodo.21166752)
 
 Complete, reproducible research pipeline, data, and manuscript source for a **controlled methodological audit of network-proximity statistics**. In a liver-expressed STRING interactome, the null standard deviation of averaged target--disease statistics shrinks approximately as |T|^−1/2, so standardized evidence can rank a larger target set above a smaller set even when its raw closest-distance effect is weaker. Two *Hypericum perforatum* constituents with a 6.2× target-count ratio provide the worked biological instance. We recommend reporting raw effect size, standardized evidence, and per-target random-walk influence decomposed into direct target–disease overlap and propagated influence.
 
@@ -112,9 +113,22 @@ This repository is dual-licensed by artifact type:
 
 ## Citation
 
-If you use this pipeline or data, please cite (update with the published DOI on acceptance):
+If you use this pipeline or data, please cite the archived software/data record
+(the concept DOI below always resolves to the latest version), and the article
+once published:
 
 ```bibtex
+@software{bevan_hperforatum_snapshot,
+  title     = {h-perforatum-network-tox-release: reproducible code and data for
+               a network-proximity target-count audit},
+  author    = {Bevan, Antony and M, Sarputheen and Mahalingam, Vijayakumar Thangavel},
+  year      = {2026},
+  publisher = {Zenodo},
+  doi       = {10.5281/zenodo.21166752},
+  url       = {https://doi.org/10.5281/zenodo.21166752},
+  note      = {Concept DOI; resolves to the latest archived version}
+}
+
 @article{bevan_effectsize_evidence,
   title   = {Separating effect size from statistical evidence in network-proximity
              rankings under target-count asymmetry: a controlled liver-interactome audit},
