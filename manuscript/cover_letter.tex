@@ -42,15 +42,15 @@ We thank you and both reviewers for an exceptionally constructive critique. The 
 
 \bigskip
 \noindent \textbf{Reframing the central claim.}
-Reviewer~2 correctly observed that the dependence of proximity Z-scores on target-set size is \emph{expected statistical precision}, not a flaw in the metric. We have rebuilt the manuscript around this insight rather than defending the original framing. The revised thesis is interpretive and, we believe, more useful to the community: network-proximity Z-scores are valid \emph{evidence} statistics whose \emph{magnitude} should not be read as a cross-compound \emph{effect-size} ranking when target counts differ sharply. This is the effect-size-versus-significance distinction of the ASA statement on p-values (Wasserstein \& Lazar, 2016), transposed to network medicine, and it is fully consistent with Guney et al.\ (2016) and Menche et al.\ (2015). All language describing variance shrinkage as a ``bias'' or ``artifact'' has been removed.
+Reviewer~2 noted that the dependence of proximity Z-scores on target-set size reflects expected statistical precision rather than a flaw in the metric. We have revised the manuscript to make this distinction explicit throughout. The revised thesis is interpretive and, we believe, more useful to the community: network-proximity Z-scores are valid \emph{evidence} statistics whose \emph{magnitude} should not be read as a cross-compound \emph{effect-size} ranking when target counts differ sharply. This is the effect-size-versus-significance distinction of the ASA statement on p-values (Wasserstein \& Lazar, 2016), transposed to network medicine, and it is fully consistent with Guney et al.\ (2016) and Menche et al.\ (2015). Language describing variance shrinkage as a general ``bias'' or ``artifact'' has been removed.
 
 \bigskip
 \noindent \textbf{New analyses and a more conservative interpretation of the headline result.}
-We formalise the null-variance shrinkage as a metric-independent scaling result, add the requested parameter-sensitivity analyses, and revalidate our proximity implementation against Guney's published toolbox code (\texttt{emreg00/\allowbreak toolbox}), reproducing $d_c$ exactly. Critically, we add a new analysis (\S2.5, Table~3, Figure~6) separating \emph{direct} target--disease overlap from \emph{propagated} network influence. This shows the raw per-target advantage is largely direct overlap; the genuinely propagated advantage is a modest $\sim$1.5$\times$. We report this candidly rather than the original headline number, and we have removed the corresponding over-claims.
+We formalise the null-variance shrinkage as a metric-independent scaling result, add the requested parameter-sensitivity analyses, and revalidate our proximity implementation against Guney's published toolbox code (\texttt{emreg00/\allowbreak toolbox}), reproducing $d_c$ exactly. We also add a new analysis (\S2.5, Table~3, Figure~6) separating \emph{direct} target--disease overlap from \emph{propagated} network influence. This shows that much of the raw per-target advantage reflects direct overlap, while the propagated advantage is more modest ($\sim$1.5$\times$). We report these components separately and have revised the interpretation accordingly.
 
 \bigskip
 \noindent \textbf{Code and data deposition (per your request).}
-The complete pipeline, curated data, pinned dependency versions, input checksums, and figure scripts are archived on GitHub and will be deposited to Zenodo with a citable DOI before final publication. The manuscript now contains a dedicated \textbf{Code Availability} section. Every headline number is regenerated from the committed data by verification scripts included in the deposit.
+The complete pipeline, curated data, pinned dependency versions, input checksums, and figure scripts are available on GitHub and will be deposited to Zenodo with a citable DOI before final resubmission. The manuscript now contains a dedicated \textbf{Code Availability} section. The principal quantitative results are regenerated from the committed data by verification scripts included in the deposit.
 
 \bigskip
 \noindent \textbf{Presentation.}
@@ -61,7 +61,7 @@ The manuscript has been rebuilt to journal standard: decimal-aligned tables, con
 \begin{itemize}
     \item \textbf{Feixiong Cheng}, Cleveland Clinic (Genomic Medicine Institute) -- chengf@ccf.org \\ \textit{Expert in network-based drug repurposing and interactome proximity.}
     \item \textbf{Minjun Chen}, National Center for Toxicological Research, FDA -- minjun.chen@fda.hhs.gov \\ \textit{Creator of DILIrank; expert in predictive liver toxicology.}
-    \item \textbf{Jörg Menche}, University of Vienna / CeMM -- jorg.menche@univie.ac.at \\ \textit{Co-developer of the network-proximity and separation framework central to this work.}
+    \item \textbf{Patrick Aloy}, IRB Barcelona -- patrick.aloy@irbbarcelona.org \\ \textit{Expert in network biology and computational systems pharmacology.}
 \end{itemize}
 
 \bigskip
