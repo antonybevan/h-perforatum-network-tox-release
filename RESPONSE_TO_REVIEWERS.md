@@ -1,18 +1,18 @@
 # Response to Reviewers
 
-**Manuscript:** *Separating effect size from statistical evidence in network-proximity rankings under target-count asymmetry: a controlled liver-interactome audit* (formerly submitted under a target-count-bias correction framing).
+**Manuscript:** *Separating effect size from statistical evidence in network-proximity rankings under target-count asymmetry: a controlled liver-interactome audit*.
 
 We thank the editor and both reviewers for their careful assessment. The comments substantially improved the manuscript. In particular, Reviewer 2 correctly noted that target-count-dependent shrinkage of the null variance is expected statistical precision rather than a flaw in proximity Z-scores. We have therefore reframed the manuscript around the distinction between standardized evidence and raw effect-size ranking, and we have removed language suggesting that proximity Z-scores are biased or that perturbation efficiency replaces them.
 
 The revision makes five substantive changes:
 
 1. **Reframed thesis.** The manuscript now states that proximity Z-scores are valid evidence statistics, but that their magnitude should not be interpreted as a cross-compound effect-size ranking when target counts differ strongly. This framing is consistent with Guney et al. (2016), Menche et al. (2015), and the ASA statement on p-values (Wasserstein and Lazar, 2016).
-2. **Direct versus propagated influence.** We added a new analysis separating direct target-DILI overlap from propagated random-walk influence (Results Section 2.4, Table 3, Figure 6). The raw approximately 3.5-fold per-target influence advantage is 62% direct overlap; the propagated residual is more modest, approximately 1.5-fold and 1.2- to 1.9-fold across alternative exclusions.
+2. **Direct versus propagated influence.** We added a new analysis separating direct target-DILI overlap from propagated random-walk influence (Results Section 2.5, Table 3, Figure 6). The raw approximately 3.5-fold per-target influence advantage is 62% direct overlap; the propagated residual is more modest, approximately 1.5-fold and 1.2- to 1.9-fold across alternative exclusions.
 3. **Requested sensitivity analyses.** We added restart-probability sensitivity, expression-floor sensitivity, and a formal null-variance scaling audit.
 4. **Guney-fidelity revalidation.** We revalidated the closest-distance proximity implementation against Guney-style degree binning and a two-sided null construction, confirming that the observed closest distances and the effect/evidence dissociation are not artifacts of the local implementation.
 5. **Operating-regime benchmark.** We added a degree-controlled liver-network calibration benchmark using 20,000 probes per target-set size and 500,000 cross-size probe pairs. This shows that the approximately \(|T|^{-1/2}\) null-precision law holds across the DILI module and size-matched pseudo-modules, and that material rank reversal is conditional rather than a generic outcome.
 
-All new results are reproducible from the deposited scripts, including `REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, and `GUNEY_FIDELITY_check.py`.
+All new results are reproducible from the committed repository scripts, including `REVIEWER_EVIDENCE.py`, `REVIEWER_EVIDENCE_leakage_scaling.py`, and `GUNEY_FIDELITY_check.py`.
 
 ---
 
@@ -20,7 +20,7 @@ All new results are reproducible from the deposited scripts, including `REVIEWER
 
 ### E.1 Code deposition in a DOI-issuing repository and Code Availability statement.
 
-Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot will be deposited in Zenodo before resubmission, and the Zenodo DOI will be inserted into the final Code Availability section. The deposited materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
+Addressed in the revised manuscript. We added a dedicated **Code Availability** section (`manuscript/sections/code_availability.tex`) describing the public GitHub repository, license terms, pinned dependency files, checksum manifest, full pipeline entry point, and reviewer-evidence verification scripts. The tagged publication snapshot will be deposited in Zenodo before final resubmission, and the Zenodo DOI will be inserted into the final Code Availability section. The deposited materials include the analysis code, curated input data, committed result tables, figure-generation scripts, and checksums for the processed data artifacts.
 
 ---
 
@@ -54,7 +54,7 @@ To reduce reliance on the two-compound example, we added the operating-regime be
 
 ### 1.6 Quantify variance shrinkage for RWR.
 
-Addressed. We no longer claim that RWR or expression-weighted influence avoids target-count variance shrinkage. At STRING >=900, the null-SD ratio is 2.57 for shortest-path proximity, 2.45 for RWR, and 2.47 for EWI, close to the expected \(\sqrt{62/10}=2.49\). Across the two network thresholds, the RWR ratio spans 2.45 to 3.04. We now present this as a metric-independent consequence of averaging over target sets.
+Addressed. We no longer claim that RWR or expression-weighted influence avoids target-count variance shrinkage. At STRING >=900, the null-SD ratio is 2.57 for shortest-path proximity, 2.45 for RWR, and 2.47 for EWI, close to the expected \(\sqrt{62/10}=2.49\). Across the two network thresholds, the RWR ratio spans 2.45 to 3.04. We now present this as a scaling result observed across the evaluated proximity and influence metrics.
 
 ### 1.7 Restart-probability sensitivity.
 
@@ -72,7 +72,7 @@ Addressed. We added an expression-floor sweep over \(0, 10^{-3}, 10^{-2}, 5 \tim
 
 ### 1.9 AI-style figure summaries.
 
-Addressed. The figure overlays and AI-style explanatory summaries were removed. The figures now contain standard titles, axes, legends, and journal-style captions. The manuscript retains a concise AI-use disclosure in the Methods: "AI-assisted tools were used for code drafting and language editing. All analyses, results, and interpretations were verified by the authors. Computational execution and primary numerical verification were performed by A.B."
+Addressed. The figure overlays and AI-style explanatory summaries were removed. The figures now contain standard titles, axes, legends, and journal-style captions. The manuscript retains a concise AI-use disclosure in the Methods: “AI-assisted tools were used for code drafting and language editing. All analyses, results, and interpretations were verified by the authors.”
 
 ---
 
@@ -86,7 +86,7 @@ We agree. This is now the central framing of the revision. We removed language d
 
 and that larger target sets can legitimately yield sharper evidence because the null standard deviation of an averaged statistic shrinks with target count. We now explicitly distinguish Quercetin's stronger standardized evidence from Hyperforin's stronger raw topological proximity.
 
-We formalize this point with a null-SD scaling audit. For random seed sets, the RWR null standard deviation scales as approximately \(|T|^{-0.477}\), close to the theoretical \(-1/2\) expectation:
+We formalize this point with a null-SD scaling audit. For random seed sets, the null standard deviation scales as approximately \(|T|^{-0.48}\), close to the theoretical \(-1/2\) expectation; the degree-controlled operating-regime benchmark refines this exponent to \(-0.499\) (95% CI \([-0.502,-0.495]\)):
 
 | \|T\| | 5 | 10 | 20 | 40 | 62 |
 |---|---|---|---|---|---|
