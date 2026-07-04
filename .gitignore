@@ -130,3 +130,10 @@ tmp/
 *.out
 *.blg
 *.log
+
+# Manuscript source and submission-only material — kept locally, excluded from the
+# public software+data repository and the Zenodo archive (deposit is software-only).
+manuscript/
+RESPONSE_TO_REVIEWERS.md
+scripts/build_submission_archives.py
+scripts/check_submission_archive.py

@@ -2,7 +2,7 @@ schema_version: 1
 project: h-perforatum-network-tox
 created_for: scientific-reports-major-revision
 purpose: >
-  Reproducibility lock for the current manuscript pipeline. This file records
+  Reproducibility lock for the current analysis pipeline. This file records
   the analysis parameters, external data payloads, package constraints, and
   compatibility conventions needed to regenerate the committed result tables.
 

@@ -47,8 +47,8 @@ keywords:
 license:
   - MIT
   - CC-BY-4.0
-version: "2.1.1"
-date-released: "2026-07-03"
+version: "2.1.2"
+date-released: "2026-07-04"
 doi: "10.5281/zenodo.21166752"
 identifiers:
   - type: doi

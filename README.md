@@ -6,7 +6,7 @@
 [![Platform: Linux | macOS | Windows](https://img.shields.io/badge/platform-Linux%20%7C%20macOS%20%7C%20Windows-lightgrey.svg)](https://github.com/antonybevan/h-perforatum-network-tox-release)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21166752.svg)](https://doi.org/10.5281/zenodo.21166752)
 
-Complete, reproducible research pipeline, data, and manuscript source for a **controlled methodological audit of network-proximity statistics**. In a liver-expressed STRING interactome, the null standard deviation of averaged target--disease statistics shrinks approximately as |T|^−1/2, so standardized evidence can rank a larger target set above a smaller set even when its raw closest-distance effect is weaker. Two *Hypericum perforatum* constituents with a 6.2× target-count ratio provide the worked biological instance. We recommend reporting raw effect size, standardized evidence, and per-target random-walk influence decomposed into direct target–disease overlap and propagated influence.
+Complete, reproducible research pipeline and data for a **controlled methodological audit of network-proximity statistics**. In a liver-expressed STRING interactome, the null standard deviation of averaged target--disease statistics shrinks approximately as |T|^−1/2, so standardized evidence can rank a larger target set above a smaller set even when its raw closest-distance effect is weaker. Two *Hypericum perforatum* constituents with a 6.2× target-count ratio provide the worked biological instance. We recommend reporting raw effect size, standardized evidence, and per-target random-walk influence decomposed into direct target–disease overlap and propagated influence.
 
 ---
 
@@ -61,7 +61,6 @@ Data integrity is anchored by `data/CHECKSUMS.sha256` (`shasum -a 256 -c data/CH
 ├── R/                      # publication figure scripts (8 figures + setup)
 ├── data/                   # committed processed inputs + raw sources + CHECKSUMS.sha256
 ├── results/tables/         # computed tables (proximity / RWR / EWI / leakage / operating regime)
-├── manuscript/             # LaTeX source (Scientific Reports format) and compiled PDF
 ├── tests/                  # validation suite (unit + invariant/oracle tests)
 ├── figures/                # publication-ready figures (PDF + TIFF)
 ├── docs/                   # data-flow documentation
@@ -109,7 +108,7 @@ This order mirrors the manuscript Methods section.
 This repository is dual-licensed by artifact type:
 
 - **Code** (analysis pipeline, metrics, permutation/leakage/Guney-fidelity analyses, and figure scripts) is released under the **MIT License**. See `LICENSE`.
-- **Manuscript text, figures, and data** (the `manuscript/`, `figures/`, `data/`, and `results/` artifacts) are released under the **Creative Commons Attribution 4.0 International (CC-BY-4.0)** license. See `LICENSE-CC-BY-4.0`.
+- **Figures and data** (the `figures/`, `data/`, and `results/` artifacts) are released under the **Creative Commons Attribution 4.0 International (CC-BY-4.0)** license. See `LICENSE-CC-BY-4.0`.
 
 ## Citation
 

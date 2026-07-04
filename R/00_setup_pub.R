@@ -116,12 +116,16 @@ theme_lancet_pub <- function(base_size = 11, base_family = main_font) {
 }
 
 save_pub_plot <- function(plot, filename, w = 180, h = 150) {
-  # Ensure output directory exists
+  # Figures are written to figures/main/ (the canonical software output). The
+  # manuscript LaTeX is maintained outside this software-only repository; if a
+  # local manuscript/figures/ directory exists it is also updated for convenience.
+  out_dirs <- list(here("figures", "main"))
+  if (dir.exists(here("manuscript"))) out_dirs <- c(out_dirs, here("manuscript", "figures"))
   dir.create(here("figures", "main"), showWarnings = FALSE, recursive = TRUE)
-  dir.create(here("manuscript", "figures"), showWarnings = FALSE, recursive = TRUE)
-  
+  for (out_dir in out_dirs) dir.create(out_dir, showWarnings = FALSE, recursive = TRUE)
+
   # 1. PDF (Vector high quality)
-  for (out_dir in list(here("figures", "main"), here("manuscript", "figures"))) {
+  for (out_dir in out_dirs) {
     ggsave(
       filename = file.path(out_dir, paste0(filename, ".pdf")),
       plot = plot,
@@ -129,9 +133,9 @@ save_pub_plot <- function(plot, filename, w = 180, h = 150) {
       device = cairo_pdf
     )
   }
-  
+
   # 2. TIFF (300 DPI Raster for submission)
-  for (out_dir in list(here("figures", "main"), here("manuscript", "figures"))) {
+  for (out_dir in out_dirs) {
     tiff_path <- file.path(out_dir, paste0(filename, ".tiff"))
     ggsave(
       filename = tiff_path,
@@ -141,8 +145,8 @@ save_pub_plot <- function(plot, filename, w = 180, h = 150) {
     )
     .postprocess_tiff(tiff_path)
   }
-  
-  message(paste("✓ Saved", filename, "(PDF + 300dpi TIFF in figures/main and manuscript/figures)"))
+
+  message(paste("✓ Saved", filename, "(PDF + 300dpi TIFF in figures/main)"))
 }
 
 # --- Project Paths ---

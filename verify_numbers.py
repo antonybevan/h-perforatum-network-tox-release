@@ -42,7 +42,6 @@ required_paths = [
     "scripts/generate_dataflow.py",
     "docs/DATA_FLOW.md",
     "results/tables/string_textmining_sensitivity.csv",
-    "RESPONSE_TO_REVIEWERS.md",
     "DATA_MANIFEST.md",
 ]
 for rel in required_paths:
@@ -50,7 +49,7 @@ for rel in required_paths:
 lock_text = read_text(ROOT/"reproducibility.lock.yml")
 check("Rscript R/fig8_opregime.R" in lock_text, "reproducibility lock includes operating-regime figure script")
 repo_url = "https://github.com/antonybevan/h-perforatum-network-tox-release"
-for rel in ["README.md", "CITATION.cff", "manuscript/sections/code_availability.tex", "manuscript/sections/data_availability.tex"]:
+for rel in ["README.md", "CITATION.cff"]:
     check(repo_url in read_text(ROOT/rel), f"{rel} contains canonical GitHub URL")
 
 print("="*72); print(" HEADLINE NUMBERS (committed result tables)"); print("="*72)
@@ -170,36 +169,18 @@ rwi_rows = cons[cons.metric=="RWI"]
 for _,r in rwi_rows.iterrows():
     check(approx(r["observed"], r["efficiency"]), f"consolidated: efficiency == observed for {r['compound']} (E=I)")
 
-print("\n"+"="*72); print(" MANUSCRIPT HEADLINE TEXT"); print("="*72)
-manuscript_text = "\n".join(read_text(p) for p in [ROOT/"manuscript/main.tex", *sorted((ROOT/"manuscript/sections").glob("*.tex"))])
-for literal, label in [
-    ("10 targets", "10 targets stated"),
-    ("62 targets", "62 targets stated"),
-    ("82-gene DILI", "82-gene DILI stated"),
-    ("$d_c = 1.30$ vs $1.68$", "dc values stated"),
-    ("$-3.86$ vs $-5.44$", "proximity Z values stated"),
-    ("$E = 0.1138$ for Hyperforin and $0.0322$ for Quercetin", "PE values stated"),
-    ("$0.0427$ versus $0.0290$", "propagated values stated"),
-    ("Hyperforin $Z = -4.09$, Quercetin $Z = -5.34$", "Guney fixed-disease values stated"),
-    ("Hyperforin $Z = -3.55$, Quercetin $Z = -3.66$", "Guney two-sided values stated"),
-    ("2.45--3.04 for random-walk influence", "RWR null-SD ratio range stated"),
-    ("2.47--2.93 for expression-weighted influence", "EWI null-SD ratio range stated"),
-    ("2.90 at $\\alpha=0.10$ to 13.35 at $\\alpha=0.70$", "alpha sweep endpoints stated"),
-    ("2.69--2.70 across floors", "expression floor range stated"),
-]:
-    check(literal in manuscript_text, label)
-
-print("\n"+"="*72); print(" FORBIDDEN LANGUAGE / ARTEFACTS in revised manuscript + figures"); print("="*72)
-# Scan active manuscript, code, and review-facing docs. Generated LaTeX aux/log
-# files and this gate itself are excluded to avoid matching the forbidden-pattern
-# definitions rather than the manuscript/package surface.
+print("\n"+"="*72); print(" FORBIDDEN LANGUAGE / ARTEFACTS in code + docs"); print("="*72)
+# Software-only deposit: the manuscript source lives with the journal and is not
+# part of this repository, so the manuscript-headline-text cross-check is enforced
+# separately by the authors. Here we scan the committed code and technical docs for
+# retracted claims / artefacts. Generated LaTeX aux/log files and this gate itself
+# are excluded to avoid matching the forbidden-pattern definitions rather than the
+# package surface.
 scan_files = (
     [str(ROOT/"README.md"), str(ROOT/"CITATION.cff"), str(ROOT/"DATA_MANIFEST.md"),
-     str(ROOT/"DATA_PROVENANCE.md"), str(ROOT/"RESPONSE_TO_REVIEWERS.md"),
+     str(ROOT/"DATA_PROVENANCE.md"),
      str(ROOT/"GUNEY_FIDELITY_REVALIDATION.md"), str(ROOT/"reproducibility.lock.yml")]
     + glob.glob(str(ROOT/"docs/*.md"))
-    + glob.glob(str(ROOT/"manuscript/*.tex"))
-    + glob.glob(str(ROOT/"manuscript/sections/*.tex"))
     + glob.glob(str(ROOT/"R/*.R"))
     + glob.glob(str(ROOT/"scripts/*.py"))
     + glob.glob(str(ROOT/"src/**/*.py"), recursive=True)

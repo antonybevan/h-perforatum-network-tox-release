@@ -40,7 +40,14 @@ FIXED_DT = (2020, 1, 1, 0, 0, 0)
 # Defensive backstop: even if one of these were ever accidentally tracked, it
 # must never enter the citable snapshot. git-ignored paths are already excluded
 # by using `git ls-files`; this is belt-and-braces.
-EXCLUDE_PREFIXES = ("scratch_id/", "scratch_anon/", ".gemini_scratch/", "tmp/")
+# Software-only deposit: the manuscript LaTeX, cover letter, and submission-only
+# material are never part of the citable code+data archive. git-tracked files are
+# already manuscript-free (manuscript/ is git-ignored); these are belt-and-braces.
+EXCLUDE_PREFIXES = (
+    "scratch_id/", "scratch_anon/", ".gemini_scratch/", "tmp/",
+    "manuscript/",
+    "scripts/build_submission_archives.py", "scripts/check_submission_archive.py",
+)
 EXCLUDE_SUFFIXES = (".blg", ".log", ".aux", ".out", ".fls", ".fdb_latexmk")
 
 

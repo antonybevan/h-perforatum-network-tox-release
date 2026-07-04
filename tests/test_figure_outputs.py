@@ -1,17 +1,21 @@
 """Smoke tests for committed figure outputs.
 
 Lightweight, language-agnostic checks that every main figure exists and is a
-valid, non-trivial PDF in both ``figures/main`` and the synchronized
-``manuscript/figures`` copy. They intentionally do NOT re-run the R figure
-scripts (which would churn the committed PDFs); they validate the published
-artifacts so a missing or corrupt figure is caught by the test suite.
+valid, non-trivial PDF in ``figures/main`` (the canonical software output).
+They intentionally do NOT re-run the R figure scripts (which would churn the
+committed PDFs); they validate the published artifacts so a missing or corrupt
+figure is caught by the test suite. If a local ``manuscript/figures`` copy is
+present it is validated too, but it is not required (the manuscript is
+maintained outside this software-only repository).
 """
 from pathlib import Path
 
 import pytest
 
 ROOT = Path(__file__).resolve().parents[1]
-FIG_DIRS = [ROOT / "figures" / "main", ROOT / "manuscript" / "figures"]
+FIG_DIRS = [ROOT / "figures" / "main"]
+if (ROOT / "manuscript" / "figures").is_dir():
+    FIG_DIRS.append(ROOT / "manuscript" / "figures")
 FIG_STEMS = [
     "fig1_lollipop",
     "fig2_dumbbell",

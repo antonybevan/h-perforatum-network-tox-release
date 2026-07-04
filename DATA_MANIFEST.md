@@ -77,8 +77,6 @@ pointers in the archival package.
 | `figures/main/fig6_chemsim.*` | `R/fig6_chemsim.R` | Main Figure 7 chemical-similarity control. |
 | `figures/main/fig7_leakage.*` | `R/fig7_leakage.R` | Main Figure 6 leakage/decomposition audit. |
 | `figures/main/fig8_opregime.*` | `R/fig8_opregime.R` | Main Figure 3 operating-regime calibration benchmark. |
-| `manuscript/figures/*` | R figure scripts | Synchronized copy used by LaTeX manuscript. |
-| `manuscript/sections/*.tex` | Manual manuscript source | Several supplementary tables are hand-authored. |
 
 ## Current Known Non-Generated Items
 
