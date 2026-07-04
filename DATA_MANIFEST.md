@@ -58,7 +58,7 @@ pointers in the archival package.
 | `results/tables/dili_module_sensitivity.csv` | `scripts/run_dili_module_sensitivity.py` | Direct-overlap sensitivity values for Results and Supplementary Table S12. |
 | `results/tables/leakage_decomposition.csv` | `scripts/generate_leakage_figure_data.py` | Figure 6 direct/propagated decomposition. |
 | `results/leakage_null_distributions.csv` | `scripts/generate_leakage_figure_data.py` | Figure 6 leakage-control background and Quercetin-subset distributions. |
-| `results/tables/target_evidence.csv` | Manual curation table | Target evidence provenance used by manuscript/supplementary documentation. |
+| `results/tables/target_evidence.csv` | Manual curation table | Target evidence provenance used in supplementary documentation. |
 | `results/tables/string_textmining_sensitivity.csv` | `scripts/run_string_textmining_sensitivity.py` | Supplementary STRING text-mining robustness (full rebuild vs no-text-mining; Huang 2018 method). |
 | `results/tables/operating_regime_moments.csv` | `scripts/run_operating_regime_benchmark.py` | Figure 3A/B and operating-regime summary. |
 | `results/tables/operating_regime_reversal.csv` | `scripts/run_operating_regime_benchmark.py` | Supplementary operating-regime reversal-rate table. |

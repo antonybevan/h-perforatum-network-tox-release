@@ -13,7 +13,7 @@ This repository's figure filenames reflect the original analysis order and do no
 | Figure 7 | `fig6_chemsim.pdf` | `fig:chemsim` | Chemical-similarity control |
 | Figure S1 | `fig5_bootstrap.pdf` | `fig:bootstrap` | Bootstrap sensitivity (baseline) |
 
-All figures exist in both `figures/main/` (canonical output from R scripts) and `manuscript/figures/` (synchronized copies for LaTeX compilation). Both PDF (vector) and TIFF (300 DPI raster) versions are provided.
+All figures are written to `figures/main/` (the canonical output from the R scripts). Both PDF (vector) and TIFF (300 DPI raster) versions are provided.
 
 The R scripts that generate each figure are:
 - `R/fig1_lollipop.R` → Figure 1
